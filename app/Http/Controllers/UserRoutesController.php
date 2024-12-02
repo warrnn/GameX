@@ -13,23 +13,23 @@ class UserRoutesController extends Controller
 
     public function store() {
         $data['page_title'] = 'GameX | Store';
-        return view('user.contents.store', compact('data'));
+        return view('user.contents.store.store', compact('data'));
     }
 
     public function detail() {
         $data['page_title'] = 'GameX | Detail';
-        return view('user.contents.detail', compact('data'));
+        return view('user.contents.store.detail', compact('data'));
     }
 
     public function offers() {
         $data['page_title'] = 'GameX | Offers';
-        return view('user.contents.offers', compact('data'));
+        return view('user.contents.store.offers', compact('data'));
     }
 
     public function category(Request $request) {
         $data['category_name'] = $request->name;
         $data['page_title'] = 'GameX | Category';
-        return view('user.contents.category', compact('data'));
+        return view('user.contents.store.category', compact('data'));
     }
 
     public function community() {
