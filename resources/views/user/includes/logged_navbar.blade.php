@@ -22,7 +22,7 @@
 
                 @foreach ($routes as $route => $label)
                 <li>
-                    <a href="{{ route($route) }}" class="{{ url()->current() == route($route) ? 'text-accent font-bold' : 'hover:text-accent transition font-bold' }}">
+                    <a href="{{ route($route) }}" class="text-strike {{ url()->current() == route($route) ? 'text-accent font-bold' : 'hover:text-accent transition font-bold' }}">
                         {{ $label }}
                     </a>
                 </li>
