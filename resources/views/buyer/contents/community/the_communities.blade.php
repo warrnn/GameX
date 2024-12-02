@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-20">
-    <section class="mt-14 flex items-center justify-center space-x-2">
+    <section class="mt-14 flex flex-col md:flex-row items-center justify-center space-x-2">
         <form class="w-full max-w-md">
             <label for="small-search" class="mb-1 text-xs font-medium text-gray-900 sr-only">Search</label>
             <div class="relative w-full">
@@ -20,49 +20,38 @@
                     class="text-white absolute end-2 bottom-1 bg-accent hover:bg-primary transition focus:ring-2 focus:outline-none focus:ring-accent font-medium rounded-full text-xs px-3 py-1">Search</button>
             </div>
         </form>
+
+        <div class="mt-4 md:mt-0">
+            <button
+                class="text-white bg-teritary hover:bg-primary transition font-medium rounded-full text-xs px-6 py-2 flex items-center justify-center">
+                Create Community
+                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+            </button>
+        </div>
     </section>
 
     <section class="h-auto mt-12">
-        <div class="flex items-center">
+        <div class="flex items-center justify-center mb-4">
             <h1 class="text-3xl text-white font-semibold">The Communities</h1>
-            <a href="{{ route('buyer.theComunities') }}" class="text-strike hover:text-accent transition ms-auto">See more</a>
         </div>
         <div class="flex flex-wrap justify-around gap-4">
-            @for ($i = 0; $i < 7; $i++)
-                <a href="#" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
-                <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="potrait dummy" class="size-44 object-cover rounded-lg">
-                <h1 class="text-white mt-5">Horizon Zero Dawn</h1>
-                <p>100k Members</p>
-        </a>
-        @endfor
-        </div>
-
-
-        <div class="flex items-center mt-16">
-            <h1 class="text-3xl text-white font-semibold">My Communities</h1>
-            <a href="{{  route('buyer.myComunities') }}" class="text-strike hover:text-accent transition ms-auto">See more</a>
-        </div>
-        <div class="flex flex-wrap justify-around gap-4">
-            @for ($i = 0; $i < 7; $i++)
-                <a href="#" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
+            @php($delay = 100)
+            @for ($i = 0; $i < 30; $i++)
+                <a href="#" class="mt-5 w-fit hover:scale-[0.98] transition text-center" data-aos="fade-up" data-aos-delay="{{ $delay }}">
                 <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="potrait dummy" class="size-44 object-cover rounded-lg">
                 <h1 class="text-white mt-5">Horizon Zero Dawn</h1>
                 <p>100k Members</p>
                 </a>
+                @if ($delay == 700)
+                @php($delay = 100)
+                @else
+                @php($delay += 100)
+                @endif
                 @endfor
-        </div>
-    </section>
-
-    <section class="h-auto mt-20">
-        <h1 class="text-3xl text-white font-semibold text-center mb-8">Recent Post</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @for ($i = 0; $i < 12; $i++)
-                <div class="flex flex-col space-y-2 bg-primary rounded-lg p-6 drop-shadow-lg" data-aos="fade-up">
-                <h1 class="text-white font-bold text-2xl">apaajaboleh</h1>
-                <h2 class="text-teritary font-semibold text-lg">Grand Theft Auto VI Community</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dolore dicta nobis. Omnis, odit recusandae ex, voluptatibus placeat alias harum velit mollitia at cupiditate blanditiis. Nisi commodi minima impedit laudantium.</p>
-        </div>
-        @endfor
         </div>
     </section>
 </section>

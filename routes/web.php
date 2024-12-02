@@ -25,6 +25,8 @@ Route::get('/category/{name}', [RoutesController::class, 'category'])->name('buy
 
 // Community
 Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
+Route::get('/thecomunities', [RoutesController::class, 'theComunities'])->name('buyer.theComunities');
+Route::get('/mycomunities', [RoutesController::class, 'myComunities'])->name('buyer.myComunities');
 
 // Games
 Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');

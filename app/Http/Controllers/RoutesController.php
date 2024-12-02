@@ -37,9 +37,19 @@ class RoutesController extends Controller
         return view('buyer.contents.community.community', compact('data'));
     }
 
+    public function theComunities() {
+        $data['page_title'] = 'GameX | The Communities';
+        return view('buyer.contents.community.the_communities', compact('data'));
+    }
+
+    public function myComunities() {
+        $data['page_title'] = 'GameX | My Communities';
+        return view('buyer.contents.community.my_communities', compact('data'));
+    }
+
     public function games() {
-        $data['page_title'] = 'GameX | Games';
-        // return view('buyer.contents.games', compact('data'));
+        $data['page_title'] = 'GameX | My Games';
+        return view('buyer.contents.games.games', compact('data'));
     }
 
     public function profile() {

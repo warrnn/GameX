@@ -24,7 +24,7 @@
     </section>
     <section class="h-auto pt-8">
         <!-- Category Games List -->
-        <section class="h-auto flex flex-wrap justify-betwwen gap-8 justify-center mt-8 pb-32">
+        <div class="h-auto flex flex-wrap justify-around gap-8 justify-center mt-8 pb-32">
             @php($delay = 100)
             @for ($i = 0; $i < 30; $i++)
                 <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $delay }}">
