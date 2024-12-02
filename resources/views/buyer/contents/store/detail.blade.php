@@ -1,4 +1,4 @@
-@extends('user.base')
+@extends('buyer.base')
 
 @section('content')
 <section class="mx-8 sm:mx-16">

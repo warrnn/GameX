@@ -1,4 +1,4 @@
-@extends('user.base')
+@extends('buyer.base')
 
 @section('content')
 <section class="mx-20">
@@ -23,7 +23,7 @@
     <section class="h-auto flex flex-wrap justify-betwwen gap-8 justify-center mt-8 pb-32">
         @php($delay = 100)
         @for ($i = 0; $i < 30; $i++)
-            <a href="{{ route('user.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+            <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $delay }}">
             <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
                 <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-52 sm:h-[17.1rem]">
                 <div class="flex flex-col w-full">

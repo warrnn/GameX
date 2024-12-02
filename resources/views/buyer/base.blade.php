@@ -14,23 +14,18 @@
 
     <!-- Javascripts -->
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <style>
-        /* div {
-            border: 1px solid red
-        } */
-    </style>
 </head>
 
-<body class="bg-neutral overflow-x-hidden ">
-    @if ($data['page_title'] == 'GameX')
-        @include('user.includes.guest_navbar')
-    @elseif ($data['page_title'] != 'GameX')
-        @include('user.includes.logged_navbar')
-    @endif
+<body class="bg-neutral overflow-x-hidden">
+    @include('buyer.includes.logged_navbar')
     <section class="pt-20">
         @yield('content')
     </section>
+    @include('buyer.includes.footer')
+
+    <!-- TiltJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+    <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
 </body>
 
 </html>

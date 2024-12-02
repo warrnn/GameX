@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserRoutesController;
+use App\Http\Controllers\RoutesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserRoutesController::class, 'index'])->name('user.index');
-Route::get('/store', [UserRoutesController::class, 'store'])->name('user.store');
-Route::get('/detail/{id}', [UserRoutesController::class, 'detail'])->name('user.detail');
-Route::get('/store/offers', [UserRoutesController::class, 'offers'])->name('user.offers');
-Route::get('/category/{name}', [UserRoutesController::class, 'category'])->name('user.category');
-Route::get('/community', [UserRoutesController::class, 'community'])->name('user.community');
-Route::get('/games', [UserRoutesController::class, 'games'])->name('user.games');
-Route::get('/profile', [UserRoutesController::class, 'profile'])->name('user.profile');
+// Guest
+Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
+
+// Store
+Route::get('/store', [RoutesController::class, 'store'])->name('buyer.store');
+Route::get('/detail/{id}', [RoutesController::class, 'detail'])->name('buyer.detail');
+Route::get('/store/offers', [RoutesController::class, 'offers'])->name('buyer.offers');
+Route::get('/category/{name}', [RoutesController::class, 'category'])->name('buyer.category');
+
+// Community
+Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
+
+// Games
+Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');
+
+// Profile
+Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');

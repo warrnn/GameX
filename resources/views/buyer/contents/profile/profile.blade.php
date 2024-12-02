@@ -1,4 +1,4 @@
-@extends('user.base')
+@extends('buyer.base')
 
 @section('content')
 <section class="max-w-4xl mx-auto p-8">
@@ -90,15 +90,15 @@
     <div id="default-styled-tab-content">
       <div class="hidden p-4 rounded-lg drop-shadow-lg space-y-4" id="styled-profile" role="tabpanel"
         aria-labelledby="profile-tab">
-        @include('user.contents.profile.games')
+        @include('buyer.contents.profile.games')
       </div>
       <div class="hidden p-4 rounded-lg drop-shadow-lg space-y-4" id="styled-dashboard" role="tabpanel"
         aria-labelledby="dashboard-tab">
-        @include('user.contents.profile.community')
+        @include('buyer.contents.profile.community')
       </div>
       <div class="hidden p-4 rounded-lg drop-shadow-lg" id="styled-settings" role="tabpanel"
         aria-labelledby="settings-tab">
-        @include('user.contents.profile.physical')
+        @include('buyer.contents.profile.physical')
       </div>
     </div>
   </section>
