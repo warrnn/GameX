@@ -34,7 +34,7 @@ class UserRoutesController extends Controller
 
     public function community() {
         $data['page_title'] = 'GameX | Community';
-        // return view('user.contents.community', compact('data'));
+        return view('user.contents.community.community', compact('data'));
     }
 
     public function games() {
