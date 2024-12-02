@@ -65,11 +65,11 @@
                 <p class="text-strike hover:text-accent transition">See more</p>
             </a>
         </div>
-        <div class="flex mt-6 flex-wrap justify-center gap-4 sm:gap-6">
+        <div class="flex mt-6 flex-wrap justify-around gap-6 sm:gap-6">
             @for ($i = 0; $i < 6; $i++)
                 <a href="{{ route('user.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
-                    <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-52 sm:h-[17.1rem]">
+                    <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full">
                         <p class="text-lg font-bold text-white truncate max-w-44">Horizon: Zero Dawn Horizon: Zero Dawn</p>
                         <p class="line-through text-strike">IDR 400.000</p>

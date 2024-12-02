@@ -13,16 +13,16 @@
             <ul class="font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 justify-end border border-gray-100 rounded-lg space-y-2 md:space-y-0 md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0">
                 @php
                 $routes = [
-                    'user.store' => 'Store',
-                    'user.community' => 'Community',
-                    'user.games' => 'Games',
-                    'user.profile' => 'Profile',
+                'user.store' => 'Store',
+                'user.community' => 'Community',
+                'user.games' => 'Games',
+                'user.profile' => 'Profile',
                 ];
                 @endphp
 
                 @foreach ($routes as $route => $label)
                 <li>
-                    <a href="{{ route($route) }}" class="text-strike {{ url()->current() == route($route) ? 'text-accent font-bold' : 'hover:text-accent transition font-bold' }}">
+                    <a href="{{ route($route) }}" class="{{ url()->current() == route($route) ? 'text-accent font-bold' : 'hover:text-accent transition font-bold text-strike' }}">
                         {{ $label }}
                     </a>
                 </li>

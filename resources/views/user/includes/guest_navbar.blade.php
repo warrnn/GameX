@@ -12,10 +12,12 @@
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex p-4 md:p-0 mt-4 justify-end border border-gray-100 rounded-lg space-x-4 rtl:space-x-reverse md:mt-0 md:border-0">
                 <li>
-                    <a href="#" class="btn font-bold bg-neutral hover:bg-accent text-white hover:text-black border-transparent hover:border-transparent">Sign In</a>
+                    <button class="btn font-bold bg-neutral hover:bg-accent text-white hover:text-black border-transparent hover:border-transparent" onclick="modal_login.showModal()">Log In</button>
+                    @include('user.includes.login_modal')
                 </li>
                 <li>
-                    <a href="#" class="btn font-bold bg-neutral hover:bg-accent text-white hover:text-black border-transparent">Register</a>
+                    <button class="btn font-bold bg-neutral hover:bg-accent text-white hover:text-black border-transparent hover:border-transparent" onclick="modal_register.showModal()">Register</button>
+                    @include('user.includes.register_modal')
                 </li>
             </ul>
         </div>
