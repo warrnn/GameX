@@ -1,18 +1,11 @@
-FROM php:8.3-apache
+FROM php:8.3-fpm-alpine
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+WORKDIR /code
 
-# mengubah document_root dari /var/www/html menjadi /var/www/html/public
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-COPY . /var/www/html/
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-# mengubah permission
-RUN chown www-data:www-data /var/www/html/ -R
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-EXPOSE 80
+# copy file project laravel
+COPY . /code
 
 RUN composer install
