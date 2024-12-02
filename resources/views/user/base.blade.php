@@ -14,6 +14,12 @@
 
     <!-- Javascripts -->
     <script src="{{ asset('js/main.js') }}"></script>
+
+    <style>
+        /* div {
+            border: 1px solid red
+        } */
+    </style>
 </head>
 
 <body class="bg-neutral overflow-x-hidden ">

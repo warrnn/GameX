@@ -44,6 +44,6 @@ class UserRoutesController extends Controller
 
     public function profile() {
         $data['page_title'] = 'GameX | Profile';
-        // return view('user.contents.profile', compact('data'));
+        return view('user.contents.profile.profile', compact('data'));
     }
 }
