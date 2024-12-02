@@ -22,7 +22,7 @@
             </div>
         </div>
     </section>
-    <section class="h-auto pt-8">
+    <section class="h-auto pt-8 mx-16">
         <!-- Category Games List -->
         <div class="h-auto flex flex-wrap justify-around gap-8 justify-center mt-8 pb-32">
             @php($delay = 100)
@@ -42,7 +42,7 @@
                 @php($delay += 100)
                 @endif
                 @endfor
-        </section>
+        </div>
     </section>
 </section>
 @endsection
