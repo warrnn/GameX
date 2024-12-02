@@ -1,9 +1,9 @@
 @extends('user.base')
 
 @section('content')
-  <div class="max-w-4xl mx-auto p-8">
+  <section class="max-w-4xl mx-auto p-8">
     {{-- Profile --}}
-    <div class="flex items-center space-x-6">
+    <section class="flex items-center space-x-6">
       <img alt="User avatar" class="h-48 w-48 rounded-full"
            src="https://avatar.iran.liara.run/public/17" />
       <div>
@@ -49,23 +49,23 @@
         </div>
 
         <div class="flex items-center space-x-4 mt-12">
-          <button class="bg-red-500 text-white px-3 py-1 rounded">
+          <button class="bg-teritary text-white px-3 py-1 rounded">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <path fill="currentColor"
                     d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5" />
             </svg>
           </button>
-          <button class="bg-red-500 text-white px-3 py-1 rounded">
+          <button class="bg-teritary text-white px-3 py-1 rounded">
             Seller Mode
           </button>
 
         </div>
       </div>
-    </div>
+    </section>
 
 
     {{-- Tabs --}}
-    <div class="mt-4">
+    <section class="mt-4">
 
 
       <div class="mb-4 border-b border-gray-700">
@@ -94,34 +94,22 @@
       <div id="default-styled-tab-content">
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel"
              aria-labelledby="profile-tab">
-          @yield('ownedgames')
+          @include('user.contents.profile.games')
         </div>
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel"
              aria-labelledby="dashboard-tab">
-          <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                    class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>.
-            Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-            control the content visibility and styling.</p>
+         @include('user.contents.profile.community')
         </div>
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-settings" role="tabpanel"
              aria-labelledby="settings-tab">
-          <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                    class="font-medium text-gray-800 dark:text-white">Settings tab's associated content</strong>. Clicking
-            another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control
-            the content visibility and styling.</p>
+          @include('user.contents.profile.physical')
         </div>
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-contacts" role="tabpanel"
-             aria-labelledby="contacts-tab">
-          <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong
-                    class="font-medium text-gray-800 dark:text-white">Contacts tab's associated content</strong>.
-            Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to
-            control the content visibility and styling.</p>
-        </div>
+      
       </div>
 
 
-    </div>
+    </section>
 
 
-  </div>
+  </section>
 @endsection
