@@ -29,7 +29,7 @@
     <section class="mt-8">
         <div class="h-auto flex flex-wrap justify-around gap-8 mt-8">
             @for ($i = 0; $i < 30; $i++)
-                <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up">
+                <a href="{{ route('buyer.play') }}" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
                     <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full text-center">

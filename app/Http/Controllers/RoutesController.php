@@ -52,6 +52,11 @@ class RoutesController extends Controller
         return view('buyer.contents.games.games', compact('data'));
     }
 
+    public function play() {
+        $data['page_title'] = 'GameX | Play';
+        return view('buyer.contents.games.play', compact('data'));
+    }
+
     public function profile() {
         $data['page_title'] = 'GameX | Profile';
         return view('buyer.contents.profile.profile', compact('data'));

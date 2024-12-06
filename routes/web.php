@@ -30,6 +30,7 @@ Route::get('/mycomunities', [RoutesController::class, 'myComunities'])->name('bu
 
 // Games
 Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');
+Route::get('/play', [RoutesController::class, 'play'])->name('buyer.play');
 
 // Profile
 Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
