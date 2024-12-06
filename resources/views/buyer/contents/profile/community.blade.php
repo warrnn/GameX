@@ -1,5 +1,5 @@
 @for($i = 0; $i < 4; $i++)
-  <div class="flex flex-col sm:flex-row items-center p-3 bg-primary rounded-lg shadow-md max-w-full">
+  <div class="flex flex-col sm:flex-row items-center p-3 bg-primary rounded-lg shadow-md max-w-full hover:scale-[0.98] transition">
   <img
     class="w-32 h-32 rounded-lg object-cover"
     src="{{ asset('assets/images/potrait_dummy.jpeg') }}"
