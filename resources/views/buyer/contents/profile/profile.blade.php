@@ -83,7 +83,7 @@
         <li class="me-2" role="presentation">
           <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
             id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab"
-            aria-controls="settings" aria-selected="false">Physical History</button>
+            aria-controls="settings" aria-selected="false">Physical Game History</button>
         </li>
       </ul>
     </div>

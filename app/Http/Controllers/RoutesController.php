@@ -21,6 +21,11 @@ class RoutesController extends Controller
         return view('buyer.contents.store.detail', compact('data'));
     }
 
+    public function payment() {
+        $data['page_title'] = 'GameX | Payment';
+        return view('buyer.contents.store.payment', compact('data'));
+    }
+
     public function offers() {
         $data['page_title'] = 'GameX | Offers';
         return view('buyer.contents.store.offers', compact('data'));
@@ -45,6 +50,11 @@ class RoutesController extends Controller
     public function myComunities() {
         $data['page_title'] = 'GameX | My Communities';
         return view('buyer.contents.community.my_communities', compact('data'));
+    }
+
+    public function detailCommunity() {
+        $data['page_title'] = 'GameX | Detail Community';
+        return view('buyer.contents.community.detail', compact('data'));
     }
 
     public function games() {

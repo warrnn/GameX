@@ -1,7 +1,7 @@
 @extends('buyer.base')
 
 @section('content')
-<section class="mx-8 sm:mx-16">
+<section class="h-auto mx-8 sm:mx-16">
     <section class="h-auto pb-32 mt-12">
         <!-- Title -->
         <div>
@@ -26,7 +26,7 @@
                     <h2 class="text-2xl font-bold text-white">IDR 729.000</h2>
                 </div>
                 <div class="mt-1">
-                    <a href="#" class="btn w-full mt-2 bg-accent text-white hover:bg-teritary transition">Buy Now</a>
+                    <a href="{{ route('buyer.payment', 'lorem') }}" class="btn w-full mt-2 bg-accent text-white hover:bg-teritary transition">Buy Now</a>
                 </div>
                 <div class="mt-4 space-y-2">
                     <div class="flex border-b border-white p-2">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="mt-8 lg:mt-4">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam veritatis rerum tempore nulla, earum aut culpa obcaecati? Ullam accusamus a nam corrupti, tenetur sunt repellendus voluptatem recusandae quae officia quia odit quod? Alias consequatur, nulla deleniti non labore reprehenderit aliquam rem, temporibus vero, facilis minima. Nesciunt obcaecati porro eius, numquam aspernatur id asperiores quisquam laudantium, dicta qui cumque error officiis earum voluptatum voluptates optio! Consequuntur, sed. Aut ipsam iure veritatis iusto iste voluptatibus quod corporis quaerat facilis obcaecati, ea esse cupiditate aperiam hic odit ipsa tenetur nostrum. Ducimus rerum voluptatibus quidem, vel magni consequatur iste dolorem exercitationem, cumque optio quae.</p>
+            <p class="text-strike">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam veritatis rerum tempore nulla, earum aut culpa obcaecati? Ullam accusamus a nam corrupti, tenetur sunt repellendus voluptatem recusandae quae officia quia odit quod? Alias consequatur, nulla deleniti non labore reprehenderit aliquam rem, temporibus vero, facilis minima. Nesciunt obcaecati porro eius, numquam aspernatur id asperiores quisquam laudantium, dicta qui cumque error officiis earum voluptatum voluptates optio! Consequuntur, sed. Aut ipsam iure veritatis iusto iste voluptatibus quod corporis quaerat facilis obcaecati, ea esse cupiditate aperiam hic odit ipsa tenetur nostrum. Ducimus rerum voluptatibus quidem, vel magni consequatur iste dolorem exercitationem, cumque optio quae.</p>
         </div>
     </section>
 </section>

@@ -29,7 +29,7 @@
         </div>
         <div class="flex flex-wrap justify-around gap-4">
             @for ($i = 0; $i < 7; $i++)
-                <a href="#" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
+                <a href="{{ route('buyer.detailCommunity', 'lorem') }}" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
                 <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="potrait dummy" class="size-44 object-cover rounded-lg">
                 <h1 class="text-white mt-5">Horizon Zero Dawn</h1>
                 <p>100k Members</p>
@@ -44,7 +44,7 @@
         </div>
         <div class="flex flex-wrap justify-around gap-4">
             @for ($i = 0; $i < 7; $i++)
-                <a href="#" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
+                <a href="{{ route('buyer.detailCommunity', 'lorem') }}" class="mt-5 w-fit hover:scale-[0.98] transition text-center">
                 <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="potrait dummy" class="size-44 object-cover rounded-lg">
                 <h1 class="text-white mt-5">Horizon Zero Dawn</h1>
                 <p>100k Members</p>

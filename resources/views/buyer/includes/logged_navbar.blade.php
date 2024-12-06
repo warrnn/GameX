@@ -1,4 +1,4 @@
-<nav class="bg-primary z-[999] w-full fixed">
+<nav class="bg-primary z-[999] w-full fixed drop-shadow-lg">
     <div class="flex flex-wrap items-center justify-between mx-auto p-2 px-8">
         <a href="{{ route('buyer.store') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('assets/logo/text_light.png') }}" class="h-16" alt="GameX Logo" />
