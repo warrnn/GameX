@@ -96,7 +96,7 @@
         aria-labelledby="dashboard-tab">
         @include('buyer.contents.profile.community')
       </div>
-      <div class="hidden p-4 rounded-lg drop-shadow-lg" id="styled-settings" role="tabpanel"
+      <div class="hidden p-4 rounded-lg drop-shadow-lg space-y-4" id="styled-settings" role="tabpanel"
         aria-labelledby="settings-tab">
         @include('buyer.contents.profile.physical')
       </div>

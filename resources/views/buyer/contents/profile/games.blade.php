@@ -1,5 +1,5 @@
 @for($i = 0; $i < 3; $i++)
-<div class="flex flex-col sm:flex-row items-center p-4 bg-primary rounded-lg shadow-lg max-w-full">
+<div class="flex flex-col sm:flex-row items-center p-4 bg-primary rounded-lg shadow-lg max-w-full hover:scale-[0.98] transition">
     <img
       class="w-64 h-36 rounded-lg object-cover"
       src="{{ asset('assets/images/landscape_dummy.jpg') }}"
