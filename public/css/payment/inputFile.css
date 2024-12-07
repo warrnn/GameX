@@ -1,0 +1,33 @@
+:root {
+    --strike: #969595;
+    --accent: #FF6347;
+}
+
+.label {
+    width: 100%;
+    height: 120px;
+    border: 2px dashed var(--strike);
+    border-radius: 5px;
+    display: block;
+    padding: 1.2em;
+    transition: border 300ms ease;
+    cursor: pointer;
+    text-align: center;
+}
+.label i {
+    display: block;
+    font-size: 42px;
+    padding-bottom: 16px;
+}
+.label i,
+.label .title {
+    color: var(--strike);
+    transition: 200ms color;
+}
+.label:hover {
+    border: 2px solid var(--accent);
+}
+.label:hover i,
+.label:hover .title {
+    color: var(--accent);
+}
