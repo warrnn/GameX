@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('communities', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("name");
-            $table->string("email")->unique();
-            $table->string("password");
-            $table->string("profile_photo_path")->nullable();
+            $table->string("description");
+            $table->uuid("game_id");
+            $table->foreign("game_id")->references("id")->on("games")->cascadeOnDelete();
+            $table->string("image_path");
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('community');
     }
 };

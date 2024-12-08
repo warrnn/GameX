@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('community', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("name");
             $table->string("description");
-            $table->uuid("game_id");
-            $table->foreign("game_id")->references("id")->on("game")->cascadeOnDelete();
-            $table->string("image_path");
+            $table->integer("price");
+            $table->uuid("category_id");
+            $table->foreign("category_id")->references("id")->on("categories")->cascadeOnDelete();
+            $table->string("publisher");
+            $table->date("release_date");
+            $table->enum("base", ["DIGITAL", "PHYSICAL"]);
+            $table->string("potrait_image_path");
+            $table->string("landscape_image_path");
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('community');
+        Schema::dropIfExists('game');
     }
 };

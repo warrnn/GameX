@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('buyers', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string("user_id");
-            $table->foreign("user_id")->references("id")->on("user")->cascadeOnDelete();
+            $table->string("address");
+            $table->string("phone", 16);
+            $table->uuid("user_id");
+            $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('buyer_');
     }
 };

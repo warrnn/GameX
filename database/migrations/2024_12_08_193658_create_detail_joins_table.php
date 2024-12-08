@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sale', function (Blueprint $table) {
+        Schema::create('detail_joins', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->integer("discount");
-            $table->date("start_date");
-            $table->date("end_date");
-            $table->uuid("game_id");
-            $table->foreign("game_id")->references("id")->on("game")->cascadeOnDelete();
+            $table->uuid("user_id");
+            $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
+            $table->uuid("community_id");
+            $table->foreign("community_id")->references("id")->on("communities")->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sale');
+        Schema::dropIfExists('detail_join');
     }
 };

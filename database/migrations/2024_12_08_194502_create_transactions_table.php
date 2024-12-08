@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaction', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->date("transaction_date");
             $table->string("shipping_number")->nullable();
             $table->enum("status", ["PROCESS", "DELIVERY", "SUCCESS", "FAILED"]);
             $table->uuid("buyer_id");
-            $table->foreign("buyer_id")->references("id")->on("buyer")->cascadeOnDelete();
+            $table->foreign("buyer_id")->references("id")->on("buyers")->cascadeOnDelete();
             $table->uuid("seller_id");
-            $table->foreign("seller_id")->references("id")->on("seller")->cascadeOnDelete();
+            $table->foreign("seller_id")->references("id")->on("sellers")->cascadeOnDelete();
             $table->uuid("game_id");
-            $table->foreign("game_id")->references("id")->on("game")->cascadeOnDelete();
+            $table->foreign("game_id")->references("id")->on("games")->cascadeOnDelete();
             $table->timestamps();
         });
     }

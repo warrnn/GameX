@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string("name");
+            $table->integer("discount");
+            $table->date("start_date");
+            $table->date("end_date");
+            $table->uuid("game_id");
+            $table->foreign("game_id")->references("id")->on("games")->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('sale');
     }
 };

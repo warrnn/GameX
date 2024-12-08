@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string("value");
-            $table->uuid("user_id");
-            $table->foreign("user_id")->references("id")->on("user")->cascadeOnDelete();
-            $table->uuid("community_id");
-            $table->foreign("community_id")->references("id")->on("community")->cascadeOnDelete();
+            $table->string("name");
+            $table->string("email")->unique();
+            $table->string("password");
+            $table->string("profile_photo_path")->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post');
+        Schema::dropIfExists('user');
     }
 };

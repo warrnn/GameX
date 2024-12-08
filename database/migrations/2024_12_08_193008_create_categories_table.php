@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_join', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->uuid("user_id");
-            $table->foreign("user_id")->references("id")->on("user")->cascadeOnDelete();
-            $table->uuid("community_id");
-            $table->foreign("community_id")->references("id")->on("community")->cascadeOnDelete();
+            $table->string("name");
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_join');
+        Schema::dropIfExists('category');
     }
 };
