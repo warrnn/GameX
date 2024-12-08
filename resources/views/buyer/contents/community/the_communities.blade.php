@@ -23,7 +23,7 @@
 
         <div class="mt-4 md:mt-0">
             <button
-                class="text-white bg-teritary hover:bg-primary transition font-medium rounded-full text-xs px-6 py-2 flex items-center justify-center">
+                class="text-white bg-teritary hover:bg-primary transition font-medium rounded-full text-xs px-6 py-2 flex items-center justify-center" onclick="create_comm_modal.showModal()">
                 Create Community
                 <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
@@ -31,6 +31,7 @@
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
             </button>
+            @include('buyer.includes.create_comm_modal')
         </div>
     </section>
 
