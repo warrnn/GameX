@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("description");
             $table->integer("price");
             $table->uuid("category_id");
-            $table->foreign("category_id")->references("id")->on("category")->onDelete("cascade");
+            $table->foreign("category_id")->references("id")->on("category")->cascadeOnDelete();
             $table->string("publisher");
             $table->date("release_date");
             $table->enum("base", ["DIGITAL", "PHYSICAL"]);

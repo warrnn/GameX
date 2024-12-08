@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("address");
             $table->string("phone", 16);
             $table->uuid("user_id");
-            $table->foreign("user_id")->references("id")->on("user")->onDelete("cascade");
+            $table->foreign("user_id")->references("id")->on("user")->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string("shipping_number")->nullable();
             $table->enum("status", ["PROCESS", "DELIVERY", "SUCCESS", "FAILED"]);
             $table->uuid("buyer_id");
-            $table->foreign("buyer_id")->references("id")->on("buyer")->onDelete("cascade");
+            $table->foreign("buyer_id")->references("id")->on("buyer")->cascadeOnDelete();
             $table->uuid("seller_id");
-            $table->foreign("seller_id")->references("id")->on("seller")->onDelete("cascade");
+            $table->foreign("seller_id")->references("id")->on("seller")->cascadeOnDelete();
             $table->uuid("game_id");
-            $table->foreign("game_id")->references("id")->on("game")->onDelete("cascade");
+            $table->foreign("game_id")->references("id")->on("game")->cascadeOnDelete();
             $table->timestamps();
         });
     }

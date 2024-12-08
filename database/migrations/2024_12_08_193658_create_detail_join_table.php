@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('detail_join', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->uuid("user_id");
-            $table->foreign("user_id")->references("id")->on("user")->onDelete("cascade");
+            $table->foreign("user_id")->references("id")->on("user")->cascadeOnDelete();
             $table->uuid("community_id");
-            $table->foreign("community_id")->references("id")->on("community")->onDelete("cascade");
+            $table->foreign("community_id")->references("id")->on("community")->cascadeOnDelete();
             $table->timestamps();
         });
     }
