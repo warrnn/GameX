@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transactions extends Model
 {
@@ -20,4 +22,14 @@ class Transactions extends Model
         'seller_id',
         'game_id',
     ];
+
+    public function sellers(): BelongsTo
+    {
+        return $this->belongsTo(Sellers::class, 'seller_id', 'id');
+    }
+
+    public function games(): HasOne
+    {
+        return $this->hasOne(Games::class, 'id', 'game_id');
+    }
 }

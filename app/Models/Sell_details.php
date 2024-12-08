@@ -7,18 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Sales extends Model
+class Sell_details extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = "sales";
-    protected $primaryKey = "id";
+    protected $table = 'sell_details';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        "discount",
-        "start_date",
-        "end_date",
-        "game_id"
+        'seller_id',
+        'game_id',
     ];
+
+    public function sellers(): BelongsTo
+    {
+        return $this->belongsTo(Sellers::class, 'id', 'seller_id');
+    }
 
     public function games(): BelongsTo
     {

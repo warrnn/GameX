@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Categories extends Model
 {
@@ -15,4 +16,9 @@ class Categories extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function games(): BelongsToMany
+    {
+        return $this->belongsToMany(Games::class, 'category_id', 'id');
+    }
 }

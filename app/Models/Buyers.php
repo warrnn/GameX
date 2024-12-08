@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Buyers extends Model
 {
@@ -16,4 +19,14 @@ class Buyers extends Model
         'address',
         'phone',
     ];
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class, 'buyer_id', 'id');
+    }
+    
+    public function buyerable(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
