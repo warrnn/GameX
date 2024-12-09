@@ -11,7 +11,7 @@
             <!-- Landscape Game Display -->
             <div class="lg:col-span-4">
                 <div>
-                    <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="w-full h-full object-cover rounded-lg drop-shadow-lg" alt="Potrait Dummy">
+                    <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="w-full h-full object-cover rounded-lg drop-shadow-lg" alt="Landscape Dummy">
                 </div>
                 <div class="mt-4">
                     <h3 class="text-lg font-bold text-white">Category</h3>

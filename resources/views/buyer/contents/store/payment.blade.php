@@ -3,19 +3,20 @@
 @section('content')
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/payment/inputFile.css') }}">
+<script src="{{ asset('js/payment/payment.js') }}"></script>
 
-<section class="h-auto py-16 mx-12 lg:mx-32">
+<section class="h-auto py-16 mx-8 lg:mx-32">
     <div>
-        <h1 class="text-4xl font-bold text-white">Horizon: Zero Down</h1>
+        <h1 class="text-4xl font-bold text-white text-center lg:text-start">Horizon: Zero Down</h1>
     </div>
-    <div class="h-auto grid lg:grid-cols-6 gap-6 mt-4">
+    <div class="h-auto grid grid-cols-1 lg:grid-cols-6 gap-6 mt-4">
         <!-- Landscape Game Display -->
         <div class="lg:col-span-4">
             <div>
-                <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="w-full h-full object-cover rounded-lg drop-shadow-lg" alt="Potrait Dummy">
+                <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="w-full h-auto object-cover rounded-lg drop-shadow-lg" alt="Portrait Dummy">
             </div>
-            <div class="mt-4 flex">
-                <h3 class="font-bold text-white text-3xl ms-auto">IDR 729.000</h3>
+            <div class="mt-4 flex justify-center lg:justify-end">
+                <h3 class="font-bold text-white text-2xl lg:text-3xl">IDR 729.000</h3>
             </div>
         </div>
         <!-- Buy Now Button & Information -->
@@ -24,13 +25,8 @@
                 <div class="flex flex-col space-y-2">
                     <label for="name">Name</label>
                     <label class="input input-bordered flex items-center gap-2">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 16 16"
-                            fill="currentColor"
-                            class="h-4 w-4 opacity-70">
-                            <path
-                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
                         </svg>
                         <input type="text" class="grow border border-transparent focus:outline-none focus:ring-0 focus:border-transparent px-4 py-2 rounded" placeholder="Name" />
                     </label>
@@ -69,15 +65,15 @@
                 <div class="flex flex-col space-y-2">
                     <label for="payment">Upload your Payment Proof</label>
                     <div class="form-group">
-                        <label class="label">
+                        <label id="inputBorder" class="label flex items-center">
                             <i class="material-icons">attach_file</i>
-                            <span class="title flex justify-center">Add File</span>
-                            <input type="file" class="outline-0 opacity-0 pointer-events-none select-none"/>
+                            <span id="inputTitle" class="title flex justify-center">Add File</span>
+                            <input id="paymentProof" type="file" class="outline-0 opacity-0 pointer-events-none select-none"/>
                         </label>
                     </div>
                 </div>
 
-                <input type="submit" value="Buy!" class="btn w-full hover:bg-accent hover:text-black transition">
+                <input type="submit" value="Buy!" class="btn w-full bg-primary hover:bg-accent hover:text-black transition" disabled>
             </form>
         </div>
     </div>

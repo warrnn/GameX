@@ -16,6 +16,7 @@ class Transactions extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         'transaction_date',
+        'payment_proof',
         'shipping_number',
         'status',
         'buyer_id',
