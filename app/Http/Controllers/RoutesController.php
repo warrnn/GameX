@@ -71,4 +71,9 @@ class RoutesController extends Controller
         $data['page_title'] = 'GameX | Profile';
         return view('buyer.contents.profile.profile', compact('data'));
     }
+
+    public function sellGames() {
+        $data['page_title'] = 'GameX | Sell Games';
+        return view('seller.contents.store.sell_games', compact('data'));
+    }
 }

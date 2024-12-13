@@ -17,11 +17,11 @@
 </head>
 
 <body class="bg-neutral overflow-x-hidden">
-    @include('guest.includes.guest_navbar')
+    @include('seller.includes.seller_navbar')
     <section class="pt-20">
         @yield('content')
     </section>
-    @include('guest.includes.footer')
+    @include('seller.includes.footer')
 
     <!-- TiltJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
