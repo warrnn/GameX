@@ -49,15 +49,9 @@
                 <details>
                     <summary class="font-bold hover:text-accent transition text-strike text-lg">Store</summary>
                     <ul class="p-2 bg-neutral shadow-lg">
-                        <li>
-                            <a href="{{ route('seller.sellGames') }}">Sell Games</a>
-                        </li>
-                        <li>
-                            <a>Manage Promotions</a>
-                        </li>
-                        <li>
-                            <a>Transaction Processes</a>
-                        </li>
+                        <li><a href="{{ route('seller.sellGames') }}">Sell Games</a></li>
+                        <li><a href="{{ route('seller.managePromotion') }}">Manage Promotions</a></li>
+                        <li><a href="{{ route('seller.transactionProcesses') }}">Transaction Processes</a></li>
                     </ul>
                 </details>
             </li>
