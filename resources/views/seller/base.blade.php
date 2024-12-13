@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <!-- Javascripts -->
+    <script src="{{ asset('js/seller/datatables.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </head>
 

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// composer install --ignore-platform-reqs
+
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
 
@@ -42,5 +44,9 @@ Route::prefix('')->group(function () {
 
 // Seller
 Route::prefix('seller')->group(function () {
+    // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
+
+    // Profile
+    Route::get('/profile', [RoutesController::class, 'sellerProfile'])->name('seller.profile');
 });

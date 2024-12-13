@@ -28,3 +28,7 @@
     scrollbar-width: thin !important;
     scrollbar-color: #8b1e3f transparent !important; /* Thumb and track */
 }
+
+label, #dt-search-0, #sellerTable_info {
+    color: white;
+}
