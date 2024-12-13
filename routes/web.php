@@ -43,4 +43,6 @@ Route::prefix('')->group(function () {
 // Seller
 Route::prefix('seller')->group(function () {
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
+    Route::get('/managepromotion', [RoutesController::class, 'managePromotion'])->name('seller.managePromotion');
+    Route::get('/transactionprocesses', [RoutesController::class, 'transactionProcesses'])->name('seller.transactionProcesses');
 });

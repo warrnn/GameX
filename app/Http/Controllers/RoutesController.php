@@ -76,4 +76,14 @@ class RoutesController extends Controller
         $data['page_title'] = 'GameX | Sell Games';
         return view('seller.contents.store.sell_games', compact('data'));
     }
+
+    public function managePromotion() {
+        $data['page_title'] = 'GameX | Manage Promotion';
+        return view('seller.contents.store.manage_promotions', compact('data'));
+    }
+
+    public function transactionProcesses() {
+        $data['page_title'] = 'GameX | Transaction Processes';
+        return view('seller.contents.store.transaction_processes', compact('data'));
+    }
 }
