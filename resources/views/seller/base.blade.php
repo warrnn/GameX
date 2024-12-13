@@ -22,11 +22,7 @@
     <section class="pt-20">
         @yield('content')
     </section>
-    @include('seller.includes.footer')
-
-    <!-- TiltJS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-    <script src="https://unpkg.com/tilt.js@1.2.1/dest/tilt.jquery.min.js"></script>
+    @include('footer')
 </body>
 
 </html>

@@ -7,11 +7,11 @@
     </div>
     <div class="mt-4 flex">
         <button class="bg-teritary text-white px-3 py-2 rounded-lg mx-auto lg:mx-0">
-            Tambah Produk +
+            Add Product +
         </button>
     </div>
-    <div class="overflow-x-auto">
-        <table id="sellerTable" class="text-white">
+    <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
+        <table id="sellerTable" class="text-white stripe hover row-border order-column">
             <thead>
                 <tr>
                     <th>No</th>
@@ -24,6 +24,7 @@
                 </tr>
             </thead>
             <tbody>
+                @for ($i = 0; $i < 10; $i++)
                 <tr>
                     <td>1</td>
                     <td>Game Name</td>
@@ -33,6 +34,7 @@
                     <td>Potrait Image</td>
                     <td>Landscape Image</td>
                 </tr>
+                @endfor
             </tbody>
         </table>
     </div>

@@ -52,3 +52,10 @@ Route::prefix('seller')->group(function () {
     // Profile
     Route::get('/profile', [RoutesController::class, 'sellerProfile'])->name('seller.profile');
 });
+
+// Admin
+Route::prefix('admin')->group(function () {
+    // Users
+    Route::get('/userslist', [RoutesController::class, 'usersList'])->name('admin.usersList');
+    Route::get('/sellerverification', [RoutesController::class, 'sellerVerification'])->name('admin.sellerVerification');
+});
