@@ -58,4 +58,10 @@ Route::prefix('admin')->group(function () {
     // Users
     Route::get('/userslist', [RoutesController::class, 'usersList'])->name('admin.usersList');
     Route::get('/sellerverification', [RoutesController::class, 'sellerVerification'])->name('admin.sellerVerification');
+
+    // Transactions
+    Route::get('/transactions', [RoutesController::class, 'transactions'])->name('admin.transactions');
+
+    // Admins
+    Route::get('/admins', [RoutesController::class, 'admins'])->name('admin.admins');
 });

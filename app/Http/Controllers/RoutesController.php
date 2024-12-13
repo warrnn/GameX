@@ -101,4 +101,14 @@ class RoutesController extends Controller
         $data['page_title'] = 'GameX | Seller Verification';
         return view('admin.contents.users.seller_verification', compact('data'));
     }
+
+    public function transactions() {
+        $data['page_title'] = 'GameX | Transactions';
+        return view('admin.contents.transactions.transactions', compact('data'));
+    }
+
+    public function admins() {
+        $data['page_title'] = 'GameX | Admins';
+        return view('admin.contents.admins.admins', compact('data'));
+    }
 }
