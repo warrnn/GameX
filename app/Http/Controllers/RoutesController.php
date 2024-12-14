@@ -107,6 +107,11 @@ class RoutesController extends Controller
         return view('admin.contents.transactions.transactions', compact('data'));
     }
 
+    public function categories() {
+        $data['page_title'] = 'GameX | Categories';
+        return view('admin.contents.categories.categories', compact('data'));
+    }
+
     public function admins() {
         $data['page_title'] = 'GameX | Admins';
         return view('admin.contents.admins.admins', compact('data'));

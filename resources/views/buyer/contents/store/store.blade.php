@@ -4,6 +4,16 @@
 <link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
 <script src="{{ asset('js/swiper/carousel.js') }}"></script>
 
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success ') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+
 <section class="mx-8 sm:mx-32">
     <!-- Search -->
     <section class="mt-8">

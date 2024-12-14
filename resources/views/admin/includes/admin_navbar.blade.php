@@ -67,6 +67,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.categories') }}" class="font-bold hover:text-accent transition text-strike text-lg">
+                    Categories
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.admins') }}" class="font-bold hover:text-accent transition text-strike text-lg">
                     Admins
                 </a>

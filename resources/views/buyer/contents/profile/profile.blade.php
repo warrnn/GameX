@@ -3,8 +3,17 @@
 @section('content')
 <section class="max-w-4xl mx-auto p-8">
   <section class="flex flex-col lg:flex-row items-center justi space-x-6">
-    <img alt="User avatar" class="h-48 w-48 rounded-full"
-      src="https://avatar.iran.liara.run/public/17" />
+    <button class="flex justify-center relative group bg-white rounded-full">
+      <img
+        alt="User avatar"
+        src="https://avatar.iran.liara.run/public/17"
+        class="h-48 w-48 rounded-full transition-all duration-300 ease-in-out group-hover:opacity-0" />
+      <img
+        alt="Hover icon"
+        src="https://static.vecteezy.com/system/resources/previews/026/703/358/non_2x/illustration-of-change-image-icon-in-dark-color-and-white-background-vector.jpg"
+        class="h-48 w-48 rounded-full absolute top-0 left-0 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 scale-75" />
+    </button>
+
     <div>
       <div class="flex mt-4 lg:mt-0">
         <div class="flex mx-auto lg:mx-0">
@@ -57,6 +66,9 @@
         </button>
         <a href="{{ route('seller.sellGames') }}" class="bg-teritary text-white px-3 py-1 rounded hover:bg-accent transition">
           Seller Mode
+        </a>
+        <a href="{{ route('buyer.logout') }}" class="bg-teritary text-white px-3 py-1 rounded hover:bg-red-600 transition">
+          Log Out
         </a>
       </div>
     </div>

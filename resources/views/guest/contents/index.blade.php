@@ -5,6 +5,16 @@
 <script src="{{ asset('js/index.js') }}"></script>
 <script src="{{ asset('js/swiper/carousel.js') }}"></script>
 
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error ') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+
 <section class="mx-8 sm:mx-32">
     <!-- Display -->
     <section class="h-auto pb-4 mt-12 grid grid-cols-6 place-items-center gap-8">

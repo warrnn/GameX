@@ -19,9 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
-
-Route::post('/register', [UserAuthController::class, 'register'])->name('guest.register');
 Route::post('/login', [UserAuthController::class, 'login'])->name('guest.login');
+Route::post('/register', [UserAuthController::class, 'register'])->name('guest.register');
 
 // Buyer
 Route::prefix('')->group(function () {
@@ -44,6 +43,7 @@ Route::prefix('')->group(function () {
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
+    Route::get('/logout', [UserAuthController::class, 'logout'])->name('buyer.logout');
 });
 
 // Seller
@@ -65,6 +65,9 @@ Route::prefix('admin')->group(function () {
 
     // Transactions
     Route::get('/transactions', [RoutesController::class, 'transactions'])->name('admin.transactions');
+
+    // Categories
+    Route::get('/categories', [RoutesController::class, 'categories'])->name('admin.categories');
 
     // Admins
     Route::get('/admins', [RoutesController::class, 'admins'])->name('admin.admins');
