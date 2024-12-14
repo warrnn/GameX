@@ -14,7 +14,7 @@
                     <th>Price</th>
                     <th>Category</th>
                     <th>Base</th>
-                    <th>Potrait Image</th>
+                    <th>Portrait Image</th>
                     <th>Landscape Image</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
                     <td>Price</td>
                     <td>Category</td>
                     <td>Base</td>
-                    <td>Potrait Image</td>
+                    <td>Portrait Image</td>
                     <td>Landscape Image</td>
                 </tr>
                 @endfor

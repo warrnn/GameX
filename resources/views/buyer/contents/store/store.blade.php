@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
 <script src="{{ asset('js/swiper/carousel.js') }}"></script>
 
-@if(session('success'))
+<!-- @if(session('success'))
 <script>
     Swal.fire({
         icon: 'success',
@@ -12,7 +12,7 @@
         confirmButtonColor: '#8B1E3F',
     })
 </script>
-@endif
+@endif -->
 
 <section class="mx-8 sm:mx-32">
     <!-- Search -->

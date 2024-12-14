@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("phone", 16);
             $table->uuid("user_id");
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
+            $table->enum("status", ["ACTIVE", "INACTIVE"]);
             $table->timestamps();
         });
     }

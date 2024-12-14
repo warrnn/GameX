@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // composer install --ignore-platform-reqs
+// php artisan storage:link
 
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
@@ -50,6 +52,9 @@ Route::prefix('')->group(function () {
 Route::prefix('seller')->group(function () {
     // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
+    Route::get('/managegame/{id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
+
     Route::get('/managepromotion', [RoutesController::class, 'managePromotion'])->name('seller.managePromotion');
     Route::get('/transactionprocesses', [RoutesController::class, 'transactionProcesses'])->name('seller.transactionProcesses');
 

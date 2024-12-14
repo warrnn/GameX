@@ -23,7 +23,7 @@ class Games extends Model
         'publisher',
         'release_date',
         'base',
-        'potrait_image_path',
+        'portrait_image_path',
         'landscape_image_path',
     ];
 

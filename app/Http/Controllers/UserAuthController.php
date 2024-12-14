@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
 use Throwable;
-
-use function Laravel\Prompts\error;
 
 class UserAuthController extends Controller
 {
@@ -35,11 +34,14 @@ class UserAuthController extends Controller
         if ($userExist) {
             return redirect()->back()->with('error', 'Email already exists on another account');
         } else {
+            $uuid = Uuid::uuid4()->toString();
             Users::create([
+                'id' => $uuid,
                 'name' => $name,
                 'email' => $email,
                 'password' => Hash::make($password)
             ]);
+            $request->session()->put('user_id', $uuid);
             return redirect()->route('buyer.store')->with('success', 'Account created');
         }
     }
@@ -61,7 +63,7 @@ class UserAuthController extends Controller
         $userExist = Users::where('email', $email)->first();
         if ($userExist) {
             if (Hash::check($password, $userExist->password)) {
-                $request->session()->put('user', $userExist);
+                $request->session()->put('user_id', $userExist->id);
                 return redirect()->route('buyer.store')->with('success', 'Login successfully');
             }
             return redirect()->back()->with('error', 'Password is incorrect');
