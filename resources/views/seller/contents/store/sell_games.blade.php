@@ -28,23 +28,35 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
+                    <th>Publisher</th>
+                    <th>Release Date</th>
                     <th>Base</th>
                     <th>Potrait Image</th>
                     <th>Landscape Image</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 0; $i < 10; $i++)
+                @foreach ($selled_games as $game)
                 <tr>
-                    <td>1</td>
-                    <td>Game Name</td>
-                    <td>Price</td>
-                    <td>Category</td>
-                    <td>Base</td>
-                    <td>Potrait Image</td>
-                    <td>Landscape Image</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $game->name }}</td>
+                    <td>{{ $game->price }}</td>
+                    <td>{{ $game->category_name }}</td>
+                    <td>{{ $game->publisher }}</td>
+                    <td>{{ $game->release_date }}</td>
+                    <td>{{ $game->base }}</td>
+                    <td>
+                        <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="potrait image" class="w-16 h-16">
+                    </td>
+                    <td>
+                        <img src="{{ asset('storage/' . $game->landscape_image_path) }}" alt="landscape image" class="w-16 h-16">
+                    </td>
+                    <td>
+                        <button class="btn bg-teritary hover:bg-accent transition text-white">Delete</button>
+                    </td>
                 </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
     </div>

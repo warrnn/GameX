@@ -52,12 +52,7 @@ class SellGamesController extends Controller
             $portrait_image->storeAs('games/', $portraitFileName, 'public');
             $landscape_image->storeAs('games/', $landscapeFileName, 'public');
 
-            // Sell_details::create([
-            //     'game_id' => $uuid,
-            //     'user_id' => session()->get('user_id')
-            // ]);
-
-            Games::create([
+            $game = Games::create([
                 'id' => $uuid,
                 'name' => $name,
                 'price' => $price,
@@ -68,6 +63,11 @@ class SellGamesController extends Controller
                 'description' => $description,
                 'portrait_image_path' => $portraitFilePath,
                 'landscape_image_path' => $landscapeFilePath
+            ]);
+
+            Sell_details::create([
+                'seller_id' => $request->session()->get('seller_id'),
+                'game_id' => $game->id
             ]);
 
             return redirect()->route('seller.sellGames')->with('success', 'Game Added Successfully');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\UserAuthController;
@@ -45,6 +46,7 @@ Route::prefix('')->group(function () {
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
+    Route::post('/registasseller', [BuyerController::class, 'registAsSeller'])->name('buyer.registAsSeller');
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('buyer.logout');
 });
 
