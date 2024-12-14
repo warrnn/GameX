@@ -45,18 +45,28 @@
     </div>
     <div class="navbar-end hidden lg:flex">
         <ul class="menu menu-horizontal px-1 font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 justify-end border border-gray-100 rounded-lg space-y-2 md:space-y-0 md:space-x-6 rtl:space-x-reverse md:mt-0 md:border-0">
+            @php
+            $routes = [
+            'seller.sellGames' => 'Sell Games',
+            'seller.managePromotion' => 'Manage Promotions',
+            'seller.transactionProcesses' => 'Transactions Processes',
+            'seller.profile' => 'Profile',
+            ];
+            @endphp
             <li>
                 <details>
-                    <summary class="font-bold hover:text-accent transition text-strike text-lg">Store</summary>
+                    <summary class="font-bold text-lg {{ url()->current() != route('seller.profile') ? 'text-accent' : 'hover:text-accent transition text-strike' }}">Store</summary>
                     <ul class="p-2 bg-neutral shadow-lg">
-                        <li><a href="{{ route('seller.sellGames') }}">Sell Games</a></li>
-                        <li><a href="{{ route('seller.managePromotion') }}">Manage Promotions</a></li>
-                        <li><a href="{{ route('seller.transactionProcesses') }}">Transaction Processes</a></li>
+                        @foreach ($routes as $route => $label)
+                        @if ($route != 'seller.profile')
+                        <li><a href="{{ route($route) }}">{{ $label }}</a></li>
+                        @endif
+                        @endforeach
                     </ul>
                 </details>
             </li>
             <li>
-                <a href="{{ route('seller.profile') }}" class="font-bold hover:text-accent transition text-strike text-lg">
+                <a href="{{ route('seller.profile') }}" class="font-bold text-lg {{ url()->current() == route('seller.profile') ? 'text-accent' : 'hover:text-accent transition text-strike' }}">
                     Profile
                 </a>
             </li>

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("name");
-            $table->string("description");
+            $table->text("description");
             $table->integer("price");
             $table->uuid("category_id");
             $table->foreign("category_id")->references("id")->on("categories")->cascadeOnDelete();
             $table->string("publisher");
             $table->date("release_date");
             $table->enum("base", ["DIGITAL", "PHYSICAL"]);
-            $table->string("potrait_image_path");
+            $table->string("portrait_image_path");
             $table->string("landscape_image_path");
             $table->timestamps();
         });
