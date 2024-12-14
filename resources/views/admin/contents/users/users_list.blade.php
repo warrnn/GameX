@@ -6,31 +6,23 @@
         <h1 class="text-4xl font-bold text-white text-center sm:text-start mx-auto lg:mx-0">Users</h1>
     </div>
     <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
-        <table id="adminTable" class="text-white stripe hover row-border order-column">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Base</th>
-                    <th>Portrait Image</th>
-                    <th>Landscape Image</th>
-                </tr>
-            </thead>
+        <table id="adminTableUser" class="text-white stripe hover row-border order-column">
             <tbody>
-                @for ($i = 0; $i < 10; $i++)
-                <tr>
-                    <td>1</td>
-                    <td>Game Name</td>
-                    <td>Price</td>
-                    <td>Category</td>
-                    <td>Base</td>
-                    <td>Portrait Image</td>
-                    <td>Landscape Image</td>
-                </tr>
-                @endfor
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user['name'] }}</td>
+                        <td>{{ $user['email'] }}</td>
+                        <td>
+                            <button>
+                                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                    View
+                                  </button>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
+
         </table>
     </div>
 </section>
