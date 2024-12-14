@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Route;
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
 
-Route::post('/register', [UserAuthController::class, 'register'])->name('guest.register');
-Route::post('/login', [UserAuthController::class, 'login'])->name('guest.login');
 
 // Buyer
 Route::prefix('')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class RoutesController extends Controller
@@ -92,8 +93,9 @@ class RoutesController extends Controller
         return view('seller.contents.profile.profile', compact('data'));
     }
 
-    public function usersList() {
+    public function usersList(Request $request) {
         $data['page_title'] = 'GameX | Users List';
+        $data['users'] = [];
         return view('admin.contents.users.users_list', compact('data'));
     }
 
