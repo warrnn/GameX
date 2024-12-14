@@ -2,7 +2,8 @@
 <dialog id="modal_login" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
         <img src="{{ asset('assets/logo/logo_light.png') }}" alt="GameX Logo" class="h-52 drop-shadow-lg mx-auto">
-        <form action="" class="flex flex-col gap-4">
+        <form action="{{ route('guest.login')}}" class="flex flex-col gap-4" method="POST">
+            @csrf
             <label class="input input-bordered flex items-center gap-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
