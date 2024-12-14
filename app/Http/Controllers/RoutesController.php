@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admins;
 use App\Models\Categories;
 use App\Models\Sellers;
+use App\Models\Transactions;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class RoutesController extends Controller
@@ -121,30 +124,35 @@ class RoutesController extends Controller
     public function usersList()
     {
         $page_title = 'GameX | Users List';
-        return view('admin.contents.users.users_list', compact('page_title'));
+        $users = Users::all();
+        return view('admin.contents.users.users_list', compact('page_title', 'users'));
     }
 
     public function sellerVerification()
     {
         $page_title = 'GameX | Seller Verification';
-        return view('admin.contents.users.seller_verification', compact('page_title'));
+        $sellers = Sellers::all();
+        return view('admin.contents.users.seller_verification', compact('page_title', 'sellers'));
     }
 
     public function transactions()
     {
         $page_title = 'GameX | Transactions';
-        return view('admin.contents.transactions.transactions', compact('page_title'));
+        $transactions = Transactions::all();
+        return view('admin.contents.transactions.transactions', compact('page_title', 'transactions'));
     }
 
     public function categories()
     {
         $page_title = 'GameX | Categories';
-        return view('admin.contents.categories.categories', compact('page_title'));
+        $categories = Categories::all();
+        return view('admin.contents.categories.categories', compact('page_title', 'categories'));
     }
 
     public function admins()
     {
         $page_title = 'GameX | Admins';
-        return view('admin.contents.admins.admins', compact('page_title'));
+        $admins = Admins::all();
+        return view('admin.contents.admins.admins', compact('page_title', 'admins'));
     }
 }

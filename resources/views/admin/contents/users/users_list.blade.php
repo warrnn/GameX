@@ -8,21 +8,17 @@
     <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
         <table id="adminTableUser" class="text-white stripe hover row-border order-column">
             <tbody>
-                @foreach($data['users'] as $user)
+                @foreach($users as $user)
                     <tr>
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td>
                             <button>
                                 <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                    Click Me
+                                    View
                                   </button>
                             </button>
                         </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="2" class="text-center">No users found.</td>
                     </tr>
                 @endforeach
             </tbody>
