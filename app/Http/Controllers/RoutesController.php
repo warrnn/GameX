@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Admins;
 use App\Models\Categories;
+use App\Models\Games;
 use App\Models\Sellers;
 use App\Models\Transactions;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class RoutesController extends Controller
 {
@@ -84,16 +86,28 @@ class RoutesController extends Controller
         return view('buyer.contents.games.play', compact('page_title'));
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
         $page_title = 'GameX | Profile';
-        return view('buyer.contents.profile.profile', compact('page_title'));
+
+        if ($request->session()->has('seller_id')) {
+            return view('buyer.contents.profile.profile', compact('page_title'));
+        }
+
+        $response = Http::withoutVerifying()->get('https://alamat.thecloudalert.com/api/kabkota/get');
+        if ($response->successful()) {
+            $kabKota = $response->json()['result'];
+            return view('buyer.contents.profile.profile', compact('page_title', 'kabKota'));
+        }
+
+        return view('buyer.contents.store.store', compact('page_title'))->with('error', 'An Error Occurred, Please Try Again');
     }
 
     public function sellGames(Request $request)
     {
         $page_title = 'GameX | Sell Games';
-        return view('seller.contents.store.sell_games', compact('page_title'));
+        $selled_games = $this->getSelledGames($request);
+        return view('seller.contents.store.sell_games', compact('page_title', 'selled_games'));
     }
 
     public function manageGame()
@@ -154,5 +168,19 @@ class RoutesController extends Controller
         $page_title = 'GameX | Admins';
         $admins = Admins::all();
         return view('admin.contents.admins.admins', compact('page_title', 'admins'));
+    }
+
+    // Non-route Function
+    public function getSelledGames(Request $request)
+    {
+        $seller_id = $request->session()->get('seller_id');
+
+        $gamesSelled = Games::select('games.*', 'categories.name')
+            ->join('categories', 'categories.id', '=', 'games.category_id')
+            ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
+            ->where('sell_details.seller_id', $seller_id)
+            ->get();
+
+        return $gamesSelled;
     }
 }

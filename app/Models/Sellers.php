@@ -15,9 +15,11 @@ class Sellers extends Model
     protected $table = 'sellers';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'domicile',
         'address',
         'phone',
         'user_id',
+        'status'
     ];
 
     public function transactions(): HasMany
