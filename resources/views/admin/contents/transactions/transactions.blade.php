@@ -10,11 +10,11 @@
             <tbody>
               @foreach ($transactions as $transaction)
                 <tr>
-                  <td>{{ $transaction['transaction_date'] }}</td>
-                  <td>{{ $transaction['shipping_number'] }}</td>
+                  <td>{{ $transaction->transaction_date }}</td>
+                  <td>{{ $transaction->shipping_number }}</td>
                   <td>
                     <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                      {{ $transaction['status'] }}
+                      {{ $transaction->status }}
                     </button>
                   </td>
                   <td>

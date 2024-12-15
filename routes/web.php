@@ -55,6 +55,7 @@ Route::prefix('seller')->group(function () {
     // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
     Route::get('/managegame/{id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::delete('/deletegame/{seller_id}/{game_id}', [SellGamesController::class, 'deleteGame'])->name('seller.deleteGame');
     Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
 
     Route::get('/managepromotion', [RoutesController::class, 'managePromotion'])->name('seller.managePromotion');

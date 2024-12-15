@@ -16,7 +16,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #1B2838 !important;
+    background-color: #1b2838 !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -29,6 +29,24 @@
     scrollbar-color: #8b1e3f transparent !important; /* Thumb and track */
 }
 
-label, #dt-search-0, #sellerTable_info {
+label {
+    color: white; 
+}
+
+#dt-search-0 {
+    border-color: white !important; 
     color: white;
+}
+
+#sellerTable_info,
+#promotionsTable_info,
+#sellerTransactionTable_info,
+#ongoingTable_info,
+#historyTable_info,
+#adminTableUser_info,
+#adminTableSeller_info,
+#adminTableTransaction_info,
+#adminTableCategory_info,
+#adminTableAdmin_info {
+    color: #ff6347;
 }

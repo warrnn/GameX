@@ -15,7 +15,7 @@
         <tbody>
           @foreach ($categories as $category)
             <tr>
-              <td>{{ $category['name'] }}</td>
+              <td>{{ $category->name }}</td>
               <td>
                 <div class="flex space-x-2">
                   <button class="px-4 py-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded shadow">

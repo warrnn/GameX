@@ -9,17 +9,13 @@
         <table id="adminTableUser" class="text-white stripe hover row-border order-column">
             <tbody>
                 @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user['name'] }}</td>
-                        <td>{{ $user['email'] }}</td>
-                        <td>
-                            <button>
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                    View
-                                  </button>
-                            </button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        <img src="{{ asset('storage/' . $user->profile_photo_path) }}" class="w-16 h-16 border rounded-full object-center" alt="User Profile Photo">
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
 

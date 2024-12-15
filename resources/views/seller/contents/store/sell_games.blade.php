@@ -10,8 +10,17 @@
     })
 </script>
 @endif -->
+<!-- @if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
 
-<section class="h-screen mx-8 lg:mx-20 mt-14">
+<section class="h-auto mx-8 lg:mx-20 my-14">
     <div class="flex">
         <h1 class="text-4xl font-bold text-white text-center sm:text-start mx-auto lg:mx-0">Sell Games</h1>
     </div>
@@ -22,20 +31,6 @@
     </div>
     <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
         <table id="sellerTable" class="text-white stripe hover row-border order-column">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Publisher</th>
-                    <th>Release Date</th>
-                    <th>Base</th>
-                    <th>Potrait Image</th>
-                    <th>Landscape Image</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
             <tbody>
                 @foreach ($selled_games as $game)
                 <tr>
@@ -53,7 +48,11 @@
                         <img src="{{ asset('storage/' . $game->landscape_image_path) }}" alt="landscape image" class="w-16 h-16">
                     </td>
                     <td>
-                        <button class="btn bg-teritary hover:bg-accent transition text-white">Delete</button>
+                        <form action="{{ route('seller.deleteGame', ['seller_id' => session('seller_id'), 'game_id' => $game->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete" class="btn bg-teritary hover:bg-accent transition text-white">
+                        </form>
                     </td>
                 </tr>
                 @endforeach

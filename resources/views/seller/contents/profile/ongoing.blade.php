@@ -1,16 +1,5 @@
 <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
     <table id="ongoingTable" class="text-white stripe hover row-border order-column">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Base</th>
-                <th>Potrait Image</th>
-                <th>Landscape Image</th>
-            </tr>
-        </thead>
         <tbody>
             @for ($i = 0; $i < 10; $i++)
             <tr>

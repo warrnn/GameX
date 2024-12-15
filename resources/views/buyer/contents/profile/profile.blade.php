@@ -28,7 +28,7 @@
       <div class="flex mt-4 lg:mt-0">
         <div class="flex mx-auto lg:mx-0">
           <h1 class="text-2xl font-bold text-white">
-            apaajaboleh
+            {{ $current_user->name }}
           </h1>
           <button class="ms-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="24" height="24" viewBox="0 0 24 24">

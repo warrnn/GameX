@@ -75,4 +75,20 @@ class SellGamesController extends Controller
             return redirect()->back()->with('error', 'Image Upload Failed');
         }
     }
+
+    public function deleteGame(Request $request)
+    {
+        try {
+
+            $seller_id  = $request->seller_id;
+            $game_id = $request->game_id;
+
+            Sell_details::where('seller_id', $seller_id)->where('game_id', $game_id)->delete();
+            Games::where('id', $game_id)->delete();
+
+            return redirect()->back()->with('success', 'Game Deleted Successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
 }

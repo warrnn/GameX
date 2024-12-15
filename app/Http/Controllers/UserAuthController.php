@@ -36,14 +36,13 @@ class UserAuthController extends Controller
         if ($userExist) {
             return redirect()->back()->with('error', 'Email already exists on another account');
         } else {
-            $uuid = Uuid::uuid4()->toString();
-            Users::create([
-                'id' => $uuid,
+            $newUser = Users::create([
+                'id' => Uuid::uuid4()->toString(),
                 'name' => $name,
                 'email' => $email,
                 'password' => Hash::make($password)
             ]);
-            $request->session()->put('user_id', $uuid);
+            $request->session()->put('user_id', $newUser->id);
             return redirect()->route('buyer.store')->with('success', 'Account created');
         }
     }

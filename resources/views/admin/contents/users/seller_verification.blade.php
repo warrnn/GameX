@@ -10,9 +10,12 @@
         <tbody>
           @foreach ($sellers as $seller)
             <tr>
-              <td>{{ $seller['user_id'] }}</td>
-              <td>{{ $seller['address'] }}</td>
-              <td>{{ $seller['phone'] }}</td>
+              <td>{{ $seller->name }}</td>
+              <td>{{ $seller->email }}</td>
+              <td>{{ $seller->domicile }}</td>
+              <td>{{ $seller->address }}</td>
+              <td>{{ $seller->phone }}</td>
+              <td class="{{ $seller->status == 'ACTIVE' ? 'text-green-500' : 'text-red-500' }}">{{ $seller->status }}</td>
               <td>
                 <div class="flex space-x-2">
                   <button class="px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded shadow">

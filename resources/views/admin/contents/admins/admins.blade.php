@@ -15,9 +15,9 @@
         <tbody>
           @foreach ($admins as $admin)
             <tr>
-              <td>{{ $admin['user_id'] }}</td>
-              <td>{{ $admin['address'] }}</td>
-              <td>{{ $admin['phone'] }}</td>
+              <td>{{ $admin->user_id }}</td>
+              <td>{{ $admin->address }}</td>
+              <td>{{ $admin->phone }}</td>
               <td>
                 <div class="flex space-x-2">
                   <button class="px-4 py-2 text-white bg-green-500 hover:bg-green-600 rounded shadow">

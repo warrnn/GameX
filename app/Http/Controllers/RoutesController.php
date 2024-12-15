@@ -45,9 +45,9 @@ class RoutesController extends Controller
 
     public function category(Request $request)
     {
-        $page_title['category_name'] = $request->name;
         $page_title = 'GameX | ' . strtoupper($request->name);
-        return view('buyer.contents.store.category', compact('page_title'));
+        $category_name = $request->name;
+        return view('buyer.contents.store.category', compact('page_title', 'category_name'));
     }
 
     public function community()
@@ -89,15 +89,16 @@ class RoutesController extends Controller
     public function profile(Request $request)
     {
         $page_title = 'GameX | Profile';
+        $current_user = Users::where('id', $request->session()->get('user_id'))->first();
 
         if ($request->session()->has('seller_id')) {
-            return view('buyer.contents.profile.profile', compact('page_title'));
+            return view('buyer.contents.profile.profile', compact('page_title', 'current_user'));
         }
 
         $response = Http::withoutVerifying()->get('https://alamat.thecloudalert.com/api/kabkota/get');
         if ($response->successful()) {
             $kabKota = $response->json()['result'];
-            return view('buyer.contents.profile.profile', compact('page_title', 'kabKota'));
+            return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota'));
         }
 
         return view('buyer.contents.store.store', compact('page_title'))->with('error', 'An Error Occurred, Please Try Again');
@@ -145,7 +146,9 @@ class RoutesController extends Controller
     public function sellerVerification()
     {
         $page_title = 'GameX | Seller Verification';
-        $sellers = Sellers::all();
+        $sellers = Sellers::select('*')
+        ->join('users', 'users.id', '=', 'sellers.user_id')
+        ->get();
         return view('admin.contents.users.seller_verification', compact('page_title', 'sellers'));
     }
 

@@ -15,10 +15,10 @@
         'survival' => 'survival.mp4',
         ];
         @endphp
-        <video src="{{ asset('assets/videos/' . $videos[$data['category_name']]) }}" class="w-full relative h-screen object-cover" autoplay muted loop></video>
+        <video src="{{ asset('assets/videos/' . $videos[$category_name]) }}" class="w-full relative h-screen object-cover" autoplay muted loop></video>
         <div class="flex bg-black/40 absolute inset-0 w-full h-full">
             <div class="m-auto text-6xl font-bold text-white drop-shadow-lg pb-20">
-                <h1 class="glitch">{{ strtoupper($data['category_name']) }}</h1>
+                <h1 class="glitch">{{ strtoupper($category_name) }}</h1>
             </div>
         </div>
     </section>

@@ -50,7 +50,6 @@
             'seller.sellGames' => 'Sell Games',
             'seller.managePromotion' => 'Manage Promotions',
             'seller.transactionProcesses' => 'Transactions Processes',
-            'seller.profile' => 'Profile',
             ];
             @endphp
             <li>
