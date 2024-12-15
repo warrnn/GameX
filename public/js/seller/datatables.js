@@ -6,17 +6,25 @@ $(document).ready(function () {
         lengthChange: true,
         autoWidth: true,
         columns: [
-            { data: "iteration", title: "No" },
+            { title: "No", orderable: false },
             { data: "name", title: "Game Name" },
             { data: "price", title: "Price" },
             { data: "category_name", title: "Category" },
             { data: "publisher", title: "Publisher" },
             { data: "release_date", title: "Release Date" },
             { data: "base", title: "Base" },
-            { data: "potrait_image_path", title: "Potrait Image", orderable: false },
-            { data: "landscape_image_path", title: "Landscape Image", orderable: false },
+            {
+                data: "potrait_image_path",
+                title: "Potrait Image",
+                orderable: false,
+            },
+            {
+                data: "landscape_image_path",
+                title: "Landscape Image",
+                orderable: false,
+            },
             { title: "Actions", orderable: false },
-        ]
+        ],
     });
 
     let tablePromotions = new DataTable("#promotionsTable", {
@@ -24,6 +32,13 @@ $(document).ready(function () {
         responsive: true,
         lengthChange: true,
         autoWidth: true,
+        columns: [
+            { title: "No", orderable: false },
+            { data: "game_name", title: "Game Name" },
+            { data: "discount", title: "Discount" },
+            { title: "Discounted Price" },
+            { title: "Actions", orderable: false },
+        ],
     });
 
     let tableSellerTransaction = new DataTable("#sellerTransactionTable", {
@@ -56,7 +71,11 @@ $(document).ready(function () {
         columns: [
             { data: "name", title: "Name" },
             { data: "email", title: "Email" },
-            { data: "profile_photo_path", title: "Profile Photo", orderable: false },
+            {
+                data: "profile_photo_path",
+                title: "Profile Photo",
+                orderable: false,
+            },
         ],
     });
 

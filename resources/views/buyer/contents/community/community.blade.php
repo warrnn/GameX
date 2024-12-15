@@ -1,6 +1,25 @@
 @extends('buyer.base')
 
 @section('content')
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
+
 <section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-20">
     <section class="mt-14 flex items-center justify-center space-x-2">
         <form class="w-full max-w-md">

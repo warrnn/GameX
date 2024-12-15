@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Games;
 use App\Models\Sell_details;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
 class SellGamesController extends Controller
@@ -79,9 +80,11 @@ class SellGamesController extends Controller
     public function deleteGame(Request $request)
     {
         try {
-
             $seller_id  = $request->seller_id;
             $game_id = $request->game_id;
+
+            Storage::disk('public')->delete(Games::where('id', $game_id)->first()->portrait_image_path);
+            Storage::disk('public')->delete(Games::where('id', $game_id)->first()->landscape_image_path);
 
             Sell_details::where('seller_id', $seller_id)->where('game_id', $game_id)->delete();
             Games::where('id', $game_id)->delete();

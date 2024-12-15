@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admins;
 use App\Models\Categories;
 use App\Models\Games;
+use App\Models\Sales;
 use App\Models\Sellers;
 use App\Models\Transactions;
 use App\Models\Users;
@@ -118,10 +119,16 @@ class RoutesController extends Controller
         return view('seller.contents.store.manage_game', compact('page_title', 'categories'));
     }
 
-    public function managePromotion()
+    public function managePromotion(Request $request)
     {
         $page_title = 'GameX | Manage Promotion';
-        return view('seller.contents.store.manage_promotions', compact('page_title'));
+        $game_sales = Sales::select('*', 'sales.id')
+            ->join('games', 'games.id', '=', 'sales.game_id')
+            ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
+            ->where('sell_details.seller_id', $request->session()->get('seller_id'))
+            ->get();
+        $selled_games = $this->getSelledGames($request);
+        return view('seller.contents.store.manage_promotions', compact('page_title', 'game_sales', 'selled_games'));
     }
 
     public function transactionProcesses()
@@ -130,10 +137,11 @@ class RoutesController extends Controller
         return view('seller.contents.store.transaction_processes', compact('page_title'));
     }
 
-    public function sellerProfile()
+    public function sellerProfile(Request $request)
     {
         $page_title = 'GameX | Seller Profile';
-        return view('seller.contents.profile.profile', compact('page_title'));
+        $current_user = Users::where('id', $request->session()->get('user_id'))->first();
+        return view('seller.contents.profile.profile', compact('page_title', 'current_user'));
     }
 
     public function usersList()
@@ -147,8 +155,8 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX | Seller Verification';
         $sellers = Sellers::select('*')
-        ->join('users', 'users.id', '=', 'sellers.user_id')
-        ->get();
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->get();
         return view('admin.contents.users.seller_verification', compact('page_title', 'sellers'));
     }
 
@@ -178,7 +186,7 @@ class RoutesController extends Controller
     {
         $seller_id = $request->session()->get('seller_id');
 
-        $gamesSelled = Games::select('games.*', 'categories.name')
+        $gamesSelled = Games::select('games.*', 'categories.name as category_name')
             ->join('categories', 'categories.id', '=', 'games.category_id')
             ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
             ->where('sell_details.seller_id', $seller_id)

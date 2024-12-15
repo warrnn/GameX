@@ -1,6 +1,25 @@
 @extends('admin.base')
 
 @section('content')
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
+
   <section class="h-screen mx-8 lg:mx-20 mt-14">
     <div class="flex">
       <h1 class="text-4xl font-bold text-white text-center sm:text-start mx-auto lg:mx-0">Seller Account Verification</h1>

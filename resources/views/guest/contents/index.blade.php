@@ -1,19 +1,28 @@
 @extends('guest.base')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
-<script src="{{ asset('js/index.js') }}"></script>
-<script src="{{ asset('js/swiper/carousel.js') }}"></script>
-
-<!-- @if(session('error'))
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
 <script>
     Swal.fire({
         icon: 'error',
-        title: '{{ session('error ') }}',
+        title: '{{ session('error') }}',
         confirmButtonColor: '#8B1E3F',
     })
 </script>
 @endif -->
+
+<link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
+<script src="{{ asset('js/index.js') }}"></script>
+<script src="{{ asset('js/swiper/carousel.js') }}"></script>
 
 <section class="mx-8 sm:mx-32">
     <!-- Display -->

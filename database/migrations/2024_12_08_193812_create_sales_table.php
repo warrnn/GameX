@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->integer("discount");
-            $table->date("start_date");
-            $table->date("end_date");
-            $table->uuid("game_id");
+            $table->uuid("game_id")->unique();
             $table->foreign("game_id")->references("id")->on("games")->cascadeOnDelete();
             $table->timestamps();
         });

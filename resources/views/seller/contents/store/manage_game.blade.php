@@ -1,9 +1,16 @@
 @extends('seller.base')
 
 @section('content')
-<script src="{{ asset('js/seller/manage_game.js') }}"></script>
-
-<!-- @if(session('error'))
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
 <script>
     Swal.fire({
         icon: 'error',
@@ -12,6 +19,8 @@
     })
 </script>
 @endif -->
+
+<script src="{{ asset('js/seller/manage_game.js') }}"></script>
 
 <section class="h-auto my-12 w-full flex items-center justify-center">
     <div class="flex flex-col space-y-4 w-full max-w-4xl mx-4">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\UserAuthController;
@@ -59,6 +60,10 @@ Route::prefix('seller')->group(function () {
     Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
 
     Route::get('/managepromotion', [RoutesController::class, 'managePromotion'])->name('seller.managePromotion');
+    Route::post('/adddiscount', [PromotionsController::class, 'addDiscount'])->name('seller.addDiscount');
+    Route::put('/updatediscount/{sale_id}', [PromotionsController::class, 'updateDiscount'])->name('seller.updateDiscount');
+    Route::delete('/deletediscount/{sale_id}', [PromotionsController::class, 'deleteDiscount'])->name('seller.deleteDiscount');
+
     Route::get('/transactionprocesses', [RoutesController::class, 'transactionProcesses'])->name('seller.transactionProcesses');
 
     // Profile

@@ -16,7 +16,7 @@
     <script src="{{ asset('js/main.js') }}"></script>
 </head>
 
-<body class="bg-neutral overflow-x-hidden">
+<body class="bg-neutral overflow-x-hidden">    
     @include('guest.includes.guest_navbar')
     <section class="pt-20">
         @yield('content')

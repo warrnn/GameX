@@ -1,6 +1,25 @@
 @extends('buyer.base')
 
 @section('content')
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
+
 <section class="h-auto mx-8 md:mx-16 mt-8 pb-20">
     <section class="flex flex-col-reverse md:flex-row items-center justify-end gap-4">
         <!-- Dropdown -->

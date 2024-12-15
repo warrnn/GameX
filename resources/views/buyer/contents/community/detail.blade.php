@@ -1,6 +1,25 @@
 @extends('buyer.base')
 
 @section('content')
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
+
 <section class="h-auto mx-8 md:mx-20 mt-12 pb-20">
     <div class="flex border-b-2 border-strike pb-4 items-center">
         <h1 class="text-2xl md:text-4xl font-bold text-white me-6">Community Detail</h1>

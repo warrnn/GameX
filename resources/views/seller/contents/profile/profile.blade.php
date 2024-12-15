@@ -1,6 +1,25 @@
 @extends('seller.base')
 
 @section('content')
+<!-- @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif -->
+
 <section class="max-w-7xl mx-auto p-8">
   <section class="flex flex-col lg:flex-row items-center justi space-x-6">
     <img alt="User avatar" class="h-48 w-48 rounded-full"
@@ -9,7 +28,7 @@
       <div class="flex mt-4 lg:mt-0">
         <div class="flex mx-auto lg:mx-0">
           <h1 class="text-2xl font-bold text-white">
-            apaajaboleh
+            {{ $current_user->name }}
           </h1>
         </div>
       </div>

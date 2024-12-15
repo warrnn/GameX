@@ -15,8 +15,6 @@ class Sales extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         "discount",
-        "start_date",
-        "end_date",
         "game_id"
     ];
 
