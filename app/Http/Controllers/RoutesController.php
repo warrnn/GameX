@@ -23,7 +23,8 @@ class RoutesController extends Controller
     public function store()
     {
         $page_title = 'GameX | Store';
-        return view('buyer.contents.store.store', compact('page_title'));
+        $games = Games::all();
+        return view('buyer.contents.store.store', compact('page_title', 'games'));
     }
 
     public function detail()
@@ -154,7 +155,7 @@ class RoutesController extends Controller
     public function sellerVerification()
     {
         $page_title = 'GameX | Seller Verification';
-        $sellers = Sellers::select('*')
+        $sellers = Sellers::select('*', 'sellers.id')
             ->join('users', 'users.id', '=', 'sellers.user_id')
             ->get();
         return view('admin.contents.users.seller_verification', compact('page_title', 'sellers'));

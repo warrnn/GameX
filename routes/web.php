@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\SellGamesController;
@@ -47,6 +49,7 @@ Route::prefix('')->group(function () {
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
+    Route::put('/changename/{user_id}', [ProfileController::class, 'changeName'])->name('buyer.changeName');
     Route::post('/registasseller', [BuyerController::class, 'registAsSeller'])->name('buyer.registAsSeller');
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('buyer.logout');
 });
@@ -74,13 +77,18 @@ Route::prefix('seller')->group(function () {
 Route::prefix('admin')->group(function () {
     // Users
     Route::get('/userslist', [RoutesController::class, 'usersList'])->name('admin.usersList');
+
     Route::get('/sellerverification', [RoutesController::class, 'sellerVerification'])->name('admin.sellerVerification');
+    Route::put('/verifyseller/{seller_id}', [AdminController::class, 'verifySeller'])->name('admin.verifySeller');
 
     // Transactions
     Route::get('/transactions', [RoutesController::class, 'transactions'])->name('admin.transactions');
 
     // Categories
     Route::get('/categories', [RoutesController::class, 'categories'])->name('admin.categories');
+    Route::post('/addcategory', [AdminController::class, 'addCategory'])->name('admin.addCategory');
+    Route::put('/editcategory/{category_id}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
+    Route::delete('/deletecategory/{category_id}', [AdminController::class, 'deleteCategory'])->name('admin.deleteCategory');
 
     // Admins
     Route::get('/admins', [RoutesController::class, 'admins'])->name('admin.admins');

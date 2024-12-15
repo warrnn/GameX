@@ -1,5 +1,5 @@
-<dialog id="edit_discount_modal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box">
+<dialog id="edit_discount_modal{{ $loop->iteration }}" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box bg-neutral">
         <h3 class="text-lg">Edit <strong>{{ $sale->name }}</strong> Discount</h3>
         <form action="{{ route('seller.updateDiscount', $sale->id) }}" method="POST" class="flex flex-col space-y-4 mt-2">
             @csrf

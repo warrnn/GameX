@@ -1,5 +1,5 @@
 <dialog id="add_promo_modal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box">
+    <div class="modal-box bg-neutral">
         <h3 class="text-lg font-bold mb-4">Add Discount</h3>
         <form action="{{ route('seller.addDiscount') }}" method="POST" class="flex flex-col space-y-4">
             @csrf

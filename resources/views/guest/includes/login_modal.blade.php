@@ -1,6 +1,6 @@
 <!-- Open the modal using ID.showModal() method -->
 <dialog id="modal_login" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box bg-neutral">
+    <div class="modal-box bg-neutral bg-neutral">
         <img src="{{ asset('assets/logo/logo_light.png') }}" alt="GameX Logo" class="h-52 drop-shadow-lg mx-auto">
         <form action="{{ route('guest.login')}}" method="POST" class="flex flex-col gap-4">
             @csrf

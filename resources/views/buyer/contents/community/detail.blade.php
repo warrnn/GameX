@@ -61,7 +61,7 @@
 </section>
 
 <dialog id="socials_modal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box">
+    <div class="modal-box bg-neutral">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
         </form>

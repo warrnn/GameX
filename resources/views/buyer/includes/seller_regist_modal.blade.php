@@ -1,6 +1,6 @@
 <!-- Open the modal using ID.showModal() method -->
 <dialog id="modal_seller_register" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box bg-neutral mx-4">
+    <div class="modal-box bg-neutral bg-neutral mx-4">
         <img src="{{ asset('assets/logo/text_light.png') }}" alt="GameX Logo" class="h-24 drop-shadow-lg mx-auto">
         <h1 class="text-center text-2xl font-bold text-white mb-8">Seller Registration</h1>
         <form action="{{ route('buyer.registAsSeller') }}" method="POST" class="flex flex-col gap-4">

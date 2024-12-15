@@ -1,5 +1,5 @@
 <dialog id="create_comm_modal" class="modal modal-bottom sm:modal-middle">
-    <div class="modal-box">
+    <div class="modal-box bg-neutral">
         <h3 class="text-lg font-bold mb-4">Create New Community</h3>
         <div class="py-2">
             <form action="" class="flex flex-col gap-4">
