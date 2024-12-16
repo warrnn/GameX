@@ -5,6 +5,11 @@
     font-style: normal;
 }
 
+::selection {
+    background-color: #ff6347;
+    color: #8b1e3f;
+}
+
 /* div {
     border: 1px solid red
 } */

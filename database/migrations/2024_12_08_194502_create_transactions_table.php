@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->date("transaction_date");
-            $table->string("payment_proof");
             $table->string("shipping_number")->nullable();
             $table->enum("status", ["PROCESS", "DELIVERY", "SUCCESS", "FAILED"]);
             $table->uuid("buyer_id");

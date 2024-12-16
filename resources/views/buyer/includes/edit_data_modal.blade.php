@@ -6,7 +6,7 @@
             @method('PUT')
             <div class="flex flex-col space-y-2">
                 <label for="">Email</label>
-                <input type="email" name="email" placeholder="Edit Data" class="input input-bordered w-full">
+                <input type="email" name="email" value="{{ $current_user->email }}" placeholder="Edit Data" class="input input-bordered w-full">
             </div>
             <div class="flex flex-col space-y-2">
                 <label for="">Old Password</label>
@@ -16,7 +16,7 @@
                 <label for="">New Password</label>
                 <input type="password" name="newpassword" placeholder="Input Your New Password" class="input input-bordered w-full">
             </div>
-            <button type="submit" class="btn w-full bg-teritary text-white hover:bg-accent hover:text-black transition">Edit Data</button>
+            <button type="submit" class="btn w-full bg-teritary text-white hover:bg-accent hover:text-black transition">Update Data</button>
         </form>
         <div class="modal-action">
             <form method="dialog">

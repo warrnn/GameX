@@ -82,7 +82,7 @@
             @if ($loop->iteration == 7)
             @break
             @endif
-            <a href="{{ route('buyer.detail', $sale_game->id) }}" class="drop-shadow-lg" data-aos="fade-up">
+            <a href="#" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
                     <img src="{{ asset('storage/' . $sale_game->portrait_image_path) }}" alt="{{ $sale_game->name }}" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full">

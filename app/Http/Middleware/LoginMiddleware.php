@@ -18,6 +18,6 @@ class LoginMiddleware
         if ($request->session()->has('user_id')) {
             return $next($request);
         }
-        return redirect()->back();
+        return redirect()->back()->with('error', 'Please Register or Login first!');
     }
 }

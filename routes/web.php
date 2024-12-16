@@ -5,6 +5,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\SellerProfileController;
 use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserAuthController;
@@ -62,7 +63,8 @@ Route::prefix('')->middleware('isLogin')->group(function () {
 Route::prefix('seller')->middleware('isSeller')->group(function () {
     // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
-    Route::get('/managegame/{id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::get('/managegame/{game_id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::put('/updategame/{game_id}', [SellGamesController::class, 'updateGame'])->name('seller.updateGame');
     Route::delete('/deletegame/{seller_id}/{game_id}', [SellGamesController::class, 'deleteGame'])->name('seller.deleteGame');
     Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
 
@@ -75,6 +77,7 @@ Route::prefix('seller')->middleware('isSeller')->group(function () {
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'sellerProfile'])->name('seller.profile');
+    Route::put('/changedata', [SellerProfileController::class, 'sellerChangeData'])->name('seller.changeData');
 });
 
 // Admin
