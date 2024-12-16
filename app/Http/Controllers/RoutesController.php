@@ -150,10 +150,11 @@ class RoutesController extends Controller
         return view('seller.contents.store.manage_promotions', compact('page_title', 'game_sales', 'selled_games'));
     }
 
-    public function transactionProcesses()
+    public function transactionProcesses(Request $request)
     {
         $page_title = 'GameX | Transaction Processes';
-        return view('seller.contents.store.transaction_processes', compact('page_title'));
+        $transactions = Transactions::where('seller_id', $request->session()->get('seller_id')->first());    
+        return view('seller.contents.store.transaction_processes', compact('page_title', 'transactions'));
     }
 
     public function sellerProfile(Request $request)

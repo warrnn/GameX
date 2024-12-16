@@ -46,6 +46,11 @@ $(document).ready(function () {
         responsive: true,
         lengthChange: true,
         autoWidth: true,
+        columns: [
+            { title: "No", orderable: false },
+            { data: "shipping_number", title: "Shipping Number" },
+            { data: "status", title: "Status" },
+        ]
     });
 
     let tableOngoing = new DataTable("#ongoingTable", {
