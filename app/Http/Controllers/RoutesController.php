@@ -18,7 +18,10 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX';
         $games = Games::all();
-        return view('guest.contents.index', compact('page_title', 'games'));
+        $sales_game = Games::select('*', 'games.id')
+            ->join('sales', 'sales.game_id', '=', 'games.id')
+            ->get();
+        return view('guest.contents.index', compact('page_title', 'games', 'sales_game'));
     }
 
     public function store()
@@ -26,15 +29,15 @@ class RoutesController extends Controller
         $page_title = 'GameX | Store';
         $games = Games::all();
         $sales_game = Games::select('*', 'games.id')
-        ->join('sales', 'sales.game_id', '=', 'games.id')
-        ->get();
+            ->join('sales', 'sales.game_id', '=', 'games.id')
+            ->get();
         return view('buyer.contents.store.store', compact('page_title', 'games', 'sales_game'));
     }
 
     public function detail(Request $request)
     {
         $page_title = 'GameX | Detail';
-        $game = Games::select('*', 'games.id',  'games.name','categories.name as category_name', 'users.name as seller_name')
+        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name')
             ->join('categories', 'categories.id', '=', 'games.category_id')
             ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
             ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
@@ -54,20 +57,20 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX | Offers';
         $sales_game = Games::select('*', 'games.id')
-        ->join('sales', 'sales.game_id', '=', 'games.id')
-        ->get();
+            ->join('sales', 'sales.game_id', '=', 'games.id')
+            ->get();
         return view('buyer.contents.store.offers', compact('page_title', 'sales_game'));
     }
 
     public function category(Request $request)
     {
-
-        $category_id = $request->id;
-
-        $category_name = Categories::where('id', $category_id)->first()->name;
-
+        $category_name = $request->category_name;
         $page_title = 'GameX | ' . strtoupper($category_name);
-        return view('buyer.contents.store.category', compact('page_title', 'category_name'));
+        $games = Games::select('*', 'games.id', 'games.name')
+            ->join('categories', 'categories.id', '=', 'games.category_id')
+            ->where('categories.name', $category_name)
+            ->get();
+        return view('buyer.contents.store.category', compact('page_title', 'category_name', 'games'));
     }
 
     public function community()
