@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 // composer install --ignore-platform-reqs
 // php artisan storage:link
+// composer require midtrans/midtrans-php --ignore-platform-reqs
+
 
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');

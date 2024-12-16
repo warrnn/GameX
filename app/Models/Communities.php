@@ -17,14 +17,9 @@ class Communities extends Model
     protected $fillable = [
         "name",
         "description",
-        "game_id",
+        "related_game",
         "image_path",
     ];
-
-    public function games(): BelongsTo
-    {
-        return $this->belongsTo(Games::class, 'id', 'game_id');
-    }
 
     public function detail_joins(): HasMany
     {

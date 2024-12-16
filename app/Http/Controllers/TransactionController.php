@@ -10,15 +10,16 @@ use Midtrans\Snap;
 
 class TransactionController extends Controller
 {
-    public function process(Request $request){
-        
+    public function process(Request $request)
+    {
+
         // $request->validate(
-            
+
         // );
 
         // $transaction = Transactions::create(
         //     [
-                
+
         //     ]
         // );
 
@@ -28,13 +29,13 @@ class TransactionController extends Controller
         Config::$isProduction = config('midtrans.isProduction');
         Config::$is3ds = config('midtrans.is3ds');
 
-         // Parameter transaksi harcode
-         $transactionDetails = [
+        // Parameter transaksi harcode
+        $transactionDetails = [
             'order_id' => 'ordercoba2', // uniqe order id
             'gross_amount' => 700000, // -> harga game
         ];
 
-        
+
         $customerDetails = [
             'first_name' => 'Sukri',
             'email' => 'sukri@gmail.com',
@@ -56,12 +57,15 @@ class TransactionController extends Controller
             'customer_details' => $customerDetails,
         ];
 
-        $snapToken = Snap::getSnapToken($params);
-
-        Log::info('Snap Token:', ['snapToken' => $snapToken]);
+        try {
+            $snapToken = Snap::getSnapToken($params);
+            Log::info('Snap Token:', ['snapToken' => $snapToken]);
+        } catch (\Exception $e) {
+            Log::error('Error getting Snap Token:', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Failed to get payment token.');
+        }
 
         $page_title = 'GameX | Payment';
         return view('buyer.contents.store.midtrans', compact('snapToken', 'page_title'));
-
     }
 }

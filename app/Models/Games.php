@@ -38,11 +38,6 @@ class Games extends Model
         return $this->hasOne(Sales::class, 'game_id', 'id');
     }
 
-    public function communities(): HasMany
-    {
-        return $this->hasMany(Communities::class, 'game_id', 'id');
-    }
-
     public function categories(): HasOne
     {
         return $this->hasOne(Categories::class, 'id', 'category_id');

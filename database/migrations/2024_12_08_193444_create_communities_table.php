@@ -15,8 +15,7 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string("name");
             $table->string("description");
-            $table->uuid("game_id");
-            $table->foreign("game_id")->references("id")->on("games")->cascadeOnDelete();
+            $table->string("related_game");
             $table->string("image_path");
             $table->timestamps();
         });

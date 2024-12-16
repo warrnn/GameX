@@ -3,7 +3,26 @@
 @section('content')
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/payment/inputFile.css') }}">
-{{-- <script src="{{ asset('js/payment/payment.js') }}"></script> --}}
+<!-- <script src="{{ asset('js/payment/payment.js') }}"></script> -->
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
 
 <section class="h-auto py-16 mx-8 lg:mx-32">
     <div>
