@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\SellGamesController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,8 @@ Route::prefix('')->middleware('isLogin')->group(function () {
     Route::get('/payment/{game_id}', [RoutesController::class, 'payment'])->name('buyer.payment');
     Route::get('/store/offers', [RoutesController::class, 'offers'])->name('buyer.offers');
     Route::get('/category/{category_name}', [RoutesController::class, 'category'])->name('buyer.category');
+    // Route::get('/payment-process', [RoutesController::class, 'paymentProcess'])->name('buyer.process');
+    Route::post('/payment-midtrans', [TransactionController::class, 'process'])->name('buyer.midtrans');
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');

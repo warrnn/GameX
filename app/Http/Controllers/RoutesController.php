@@ -53,6 +53,11 @@ class RoutesController extends Controller
         return view('buyer.contents.store.payment', compact('page_title'));
     }
 
+    public function paymentProcess(){
+        $page_title = 'GameX | Payment';
+        return view('buyer.contents.store.midtrans', compact('page_title'));
+    }
+
     public function offers()
     {
         $page_title = 'GameX | Offers';
@@ -153,10 +158,11 @@ class RoutesController extends Controller
         return view('seller.contents.store.manage_promotions', compact('page_title', 'game_sales', 'selled_games'));
     }
 
-    public function transactionProcesses()
+    public function transactionProcesses(Request $request)
     {
         $page_title = 'GameX | Transaction Processes';
-        return view('seller.contents.store.transaction_processes', compact('page_title'));
+        $transactions = Transactions::where('seller_id', $request->session()->get('seller_id')->first());    
+        return view('seller.contents.store.transaction_processes', compact('page_title', 'transactions'));
     }
 
     public function sellerProfile(Request $request)
