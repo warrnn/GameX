@@ -30,7 +30,7 @@ class TransactionController extends Controller
 
          // Parameter transaksi harcode
          $transactionDetails = [
-            'order_id' => 'namaGame',
+            'order_id' => 'ordercoba2', // uniqe order id
             'gross_amount' => 700000, // -> harga game
         ];
 
