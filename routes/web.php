@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // composer install --ignore-platform-reqs
-// php artisan storage:link
+// accent
 
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
@@ -43,6 +44,7 @@ Route::prefix('')->middleware('isLogin')->group(function () {
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
+    Route::post('/community', [CommunityController::class, 'addCommunity'])->name('community.store');
     Route::get('/thecomunities', [RoutesController::class, 'theComunities'])->name('buyer.theComunities');
     Route::get('/mycomunities', [RoutesController::class, 'myComunities'])->name('buyer.myComunities');
     Route::get('/detailCommunity/{id}', [RoutesController::class, 'detailCommunity'])->name('buyer.detailCommunity');

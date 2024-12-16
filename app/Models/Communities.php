@@ -17,7 +17,7 @@ class Communities extends Model
     protected $fillable = [
         "name",
         "description",
-        "game_id",
+        "related_game",
         "image_path",
     ];
 
