@@ -18,10 +18,20 @@ class SellerMiddleware
     {
         $isSellerActive = Sellers::where('user_id', $request->session()->get('user_id'))->first()->status == 'ACTIVE';
 
-        if ($request->session()->has('seller_id') && $isSellerActive) {
+        if ($this->getUserSellerId($request) && $isSellerActive) {
             return $next($request);
+        } else { 
+            return redirect()->back()->with('info', 'Please wait for admin approval');
         }
 
         return redirect()->back();
+    }
+
+    public function getUserSellerId(Request $request)
+    {
+        $user_id = $request->session()->get('user_id');
+        $seller_id = Sellers::where('user_id', $user_id)->first();
+
+        return $seller_id->id;
     }
 }

@@ -104,7 +104,6 @@ $(document).ready(function () {
             { data: "transaction_date", title: "Transaction Date" },
             { data: "shipping_number", title: "Shipping Number" },
             { data: "status", title: "Status" },
-            { data: "payment_proof", title: "Payment Proof", orderable: false },
             { data: "actions", title: "Actions", orderable: false },
         ],
     });

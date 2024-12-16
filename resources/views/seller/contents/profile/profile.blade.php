@@ -28,7 +28,7 @@
       <div class="flex mt-4 lg:mt-0">
         <div class="flex mx-auto lg:mx-0">
           <h1 class="text-2xl font-bold text-white">
-            {{ $current_user->name }}
+            {{ $current_seller->name }}
           </h1>
         </div>
       </div>
@@ -40,7 +40,7 @@
               d="M192 64C86 64 0 150 0 256s86 192 192 192h256c106 0 192-86 192-192S554 64 448 64zm304 104a40 40 0 1 1 0 80a40 40 0 1 1 0-80M392 304a40 40 0 1 1 80 0a40 40 0 1 1-80 0M168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32z" />
           </svg>
           <span>
-            7 Prodcuts
+            {{ $products_count }} Prodcuts
           </span>
         </div>
         <div class="flex items-center space-x-1">
@@ -54,13 +54,13 @@
             </g>
           </svg>
           <span>
-            14 Transactions
+            {{ $transactions_count }} Transactions
           </span>
         </div>
       </div>
 
       <div class="flex items-center space-x-4 mt-4 lg:mt-12">
-        <button class="bg-teritary text-white px-3 py-1 rounded hover:bg-accent transition">
+        <button class="bg-teritary text-white px-3 py-1 rounded hover:bg-accent transition" onclick="edit_seller_data_modal.showModal()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="currentColor"
               d="m9.25 22l-.4-3.2q-.325-.125-.612-.3t-.563-.375L4.7 19.375l-2.75-4.75l2.575-1.95Q4.5 12.5 4.5 12.338v-.675q0-.163.025-.338L1.95 9.375l2.75-4.75l2.975 1.25q.275-.2.575-.375t.6-.3l.4-3.2h5.5l.4 3.2q.325.125.613.3t.562.375l2.975-1.25l2.75 4.75l-2.575 1.95q.025.175.025.338v.674q0 .163-.05.338l2.575 1.95l-2.75 4.75l-2.95-1.25q-.275.2-.575.375t-.6.3l-.4 3.2zm2.8-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5" />
@@ -70,6 +70,7 @@
           Buyer Mode
         </a>
       </div>
+      @include('seller.includes.edit_seller_data_modal')
     </div>
   </section>
 

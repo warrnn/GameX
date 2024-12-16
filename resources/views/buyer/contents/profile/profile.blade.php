@@ -10,6 +10,15 @@
     })
 </script>
 @endif
+@if(session('info'))
+<script>
+    Swal.fire({
+        icon: 'info',
+        title: '{{ session('info') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
 @if(session('error'))
 <script>
     Swal.fire({
@@ -58,7 +67,7 @@
               d="M192 64C86 64 0 150 0 256s86 192 192 192h256c106 0 192-86 192-192S554 64 448 64zm304 104a40 40 0 1 1 0 80a40 40 0 1 1 0-80M392 304a40 40 0 1 1 80 0a40 40 0 1 1-80 0M168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32z" />
           </svg>
           <span>
-            15 Games
+            {{ $games_count }} Games
           </span>
         </div>
         <div class="flex items-center space-x-1">
@@ -72,7 +81,7 @@
             </g>
           </svg>
           <span>
-            7 Communities
+            {{ $communities_count }} Communities
           </span>
         </div>
       </div>
@@ -86,7 +95,7 @@
         </button>
         @include('buyer.includes.edit_data_modal')
         </dialog>
-        @if (session('seller_id') != null)
+        @if ($isSeller)
         <a href="{{ route('seller.sellGames') }}" class="bg-teritary text-white px-3 py-1 rounded hover:bg-accent transition">
           Seller Mode
         </a>
