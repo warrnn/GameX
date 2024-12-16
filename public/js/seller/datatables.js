@@ -126,10 +126,10 @@ $(document).ready(function () {
         lengthChange: true,
         autoWidth: true,
         columns: [
-            { data: "user_id", title: "User ID" },
-            { data: "address", title: "Address" },
-            { data: "phone", title: "Phone" },
-            { data: "actions", title: "Actions", orderable: false },
+            { data: "user_id", title: "User ID", orderable: false },
+            { data: "name", title: "Name" },
+            { data: "email", title: "Email" },
+            { title: "Actions", orderable: false },
         ],
     });
 });

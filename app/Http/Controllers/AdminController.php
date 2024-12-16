@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admins;
 use App\Models\Categories;
 use App\Models\Sellers;
 use Illuminate\Http\Request;
@@ -65,5 +66,37 @@ class AdminController extends Controller
         Categories::where('id', $category_id)->delete();
 
         return redirect()->route('admin.categories')->with('success', 'Category Deleted Successfully');
+    }
+
+    public function addAdmin(Request $request)
+    {
+        try {
+            $request->validate([
+                'user' => 'required',
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+
+        $user_id = $request->user;
+
+        if (Admins::where('user_id', $user_id)->exists()) {
+            return redirect()->back()->with('error', 'User Already Added as Admin');
+        } else {
+            Admins::create([
+                'user_id' => $user_id
+            ]);
+
+            return redirect()->route('admin.admins')->with('success', 'Admin Added Successfully');
+        }
+    }
+
+    public function deleteAdmin(Request $request)
+    {
+        $admin_id = $request->admin_id;
+
+        Admins::where('id', $admin_id)->delete();
+
+        return redirect()->route('admin.admins')->with('success', 'Admin Deleted Successfully');
     }
 }

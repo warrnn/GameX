@@ -21,27 +21,23 @@
 
     <!-- Discounted Games List -->
     <section class="h-auto flex flex-wrap justify-around gap-8 mt-8 pb-32">
-        @php($delay = 100)
-        @for ($i = 0; $i < 30; $i++)
-            <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+        @foreach ($sales_game as $sale_game)
+            <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up">
             <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
-                <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-52 sm:h-[17.1rem]">
+                <img src="{{ asset('storage/' . $sale_game->portrait_image_path) }}" alt="{{ $sale_game->name }}" class="rounded-lg h-52 sm:h-[17.1rem]">
                 <div class="flex flex-col w-full">
-                    <p class="text-lg font-bold text-white truncate max-w-48">Horizon: Zero Dawn</p>
-                    <p class="line-through text-strike">IDR 400.000</p>
+                    <p class="text-lg font-bold text-white truncate max-w-48">{{ $sale_game->name }}</p>
+                    <p class="line-through text-strike">IDR {{ number_format($sale_game->price, 0, ',', '.') }}</p>
                     <div class="flex items-center">
-                        <p class="text-white">IDR 100.000</p>
-                        <p class="ms-auto bg-accent p-1 rounded-lg text-xs text-white">75%</p>
+                        <p class="text-white">
+                            IDR IDR {{ number_format(($sale_game->price - ($sale_game->price * $sale_game->discount / 100)), 0, ',', '.') }}
+                        </p>
+                        <p class="ms-auto bg-accent p-1 rounded-lg text-xs text-white">{{ $sale_game->discount }}%</p>
                     </div>
                 </div>
             </div>
             </a>
-            @if ($delay == 600)
-            @php($delay = 100)
-            @else
-            @php($delay += 100)
-            @endif
-            @endfor
+            @endforeach
     </section>
 </section>
 @endsection

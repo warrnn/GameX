@@ -15,8 +15,6 @@ class Admins extends Model
     protected $table = 'admins';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'address',
-        'phone',
         'user_id',
     ];
 

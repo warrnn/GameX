@@ -17,20 +17,31 @@ class RoutesController extends Controller
     public function index()
     {
         $page_title = 'GameX';
-        return view('guest.contents.index', compact('page_title'));
+        $games = Games::all();
+        return view('guest.contents.index', compact('page_title', 'games'));
     }
 
     public function store()
     {
         $page_title = 'GameX | Store';
         $games = Games::all();
-        return view('buyer.contents.store.store', compact('page_title', 'games'));
+        $sales_game = Games::select('*', 'games.id')
+        ->join('sales', 'sales.game_id', '=', 'games.id')
+        ->get();
+        return view('buyer.contents.store.store', compact('page_title', 'games', 'sales_game'));
     }
 
-    public function detail()
+    public function detail(Request $request)
     {
         $page_title = 'GameX | Detail';
-        return view('buyer.contents.store.detail', compact('page_title'));
+        $game = Games::select('*', 'games.id',  'games.name','categories.name as category_name', 'users.name as seller_name')
+            ->join('categories', 'categories.id', '=', 'games.category_id')
+            ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
+            ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->where('games.id', $request->game_id)
+            ->first();
+        return view('buyer.contents.store.detail', compact('page_title', 'game'));
     }
 
     public function payment()
@@ -42,13 +53,20 @@ class RoutesController extends Controller
     public function offers()
     {
         $page_title = 'GameX | Offers';
-        return view('buyer.contents.store.offers', compact('page_title'));
+        $sales_game = Games::select('*', 'games.id')
+        ->join('sales', 'sales.game_id', '=', 'games.id')
+        ->get();
+        return view('buyer.contents.store.offers', compact('page_title', 'sales_game'));
     }
 
     public function category(Request $request)
     {
-        $page_title = 'GameX | ' . strtoupper($request->name);
-        $category_name = $request->name;
+
+        $category_id = $request->id;
+
+        $category_name = Categories::where('id', $category_id)->first()->name;
+
+        $page_title = 'GameX | ' . strtoupper($category_name);
         return view('buyer.contents.store.category', compact('page_title', 'category_name'));
     }
 
@@ -178,8 +196,11 @@ class RoutesController extends Controller
     public function admins()
     {
         $page_title = 'GameX | Admins';
-        $admins = Admins::all();
-        return view('admin.contents.admins.admins', compact('page_title', 'admins'));
+        $admins = Admins::select('*', 'admins.id')
+            ->join('users', 'users.id', '=', 'admins.user_id')
+            ->get();
+        $users = Users::all();
+        return view('admin.contents.admins.admins', compact('page_title', 'admins', 'users'));
     }
 
     // Non-route Function

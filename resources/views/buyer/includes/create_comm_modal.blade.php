@@ -15,11 +15,7 @@
 
                 <div class="space-y-2">
                     <label for="">Related Game</label>
-                    <select name="" id="" class="select select-bordered w-full">
-                        @for ($i = 0; $i < 10; $i++)
-                            <option value="">Game {{ $i }}</option>
-                            @endfor
-                    </select>
+                    <input type="text" class="input input-bordered w-full" placeholder="Related Game" />
                 </div>
 
                 <div class="flex flex-col space-y-2">
@@ -27,7 +23,7 @@
                     <textarea type="text" class="textarea textarea-bordered" placeholder="Community Description"></textarea>
                 </div>
 
-                <input type="submit" value="Create" class="btn w-full hover:bg-accent hover:text-black transition">
+                <input type="submit" value="Create" class="btn w-full bg-teritary text-white hover:bg-accent hover:text-black transitio">
             </form>
         </div>
         <div class="modal-action">

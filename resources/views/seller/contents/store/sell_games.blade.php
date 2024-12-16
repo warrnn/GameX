@@ -42,10 +42,10 @@
                     <td>{{ $game->release_date }}</td>
                     <td>{{ $game->base }}</td>
                     <td>
-                        <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="potrait image" class="size-1/4">
+                        <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="potrait image" class="w-16 h-24">
                     </td>
                     <td>
-                        <img src="{{ asset('storage/' . $game->landscape_image_path) }}" alt="landscape image" class="size-1/2">
+                        <img src="{{ asset('storage/' . $game->landscape_image_path) }}" alt="landscape image" class="w-24 h-16">
                     </td>
                     <td>
                         <form action="{{ route('seller.deleteGame', ['seller_id' => session('seller_id'), 'game_id' => $game->id]) }}" method="POST">

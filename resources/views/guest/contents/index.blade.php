@@ -30,20 +30,25 @@
         <!-- Carousel -->
         <div class="swiper mySwiper w-full h-min rounded-lg col-span-6 lg:col-span-4">
             <div class="swiper-wrapper">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="swiper-slide">
-                    <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="relative rounded-lg" alt="Landscape Dummy">
-                    <div class="flex bg-gradient-to-t from-black/85 from-10% to-transparent to-100% absolute inset-0 w-full h-full">
-                        <div class="mt-auto mb-8 ms-8 text-start">
-                            <h1 class="font-bold text-lg min-[420px]:text-xl sm:text-2xl text-white">Horizon Zero Dawn</h1>
-                            <p class="mb-4">IDR 729.000</p>
-                            <a href="#" class="px-4 py-2 bg-accent hover:bg-primary transition text-white rounded-lg mt-4">Buy Now</a>
+                @foreach ($games as $game)
+                @if ($loop->iteration == 5)
+                @break
+                @endif
+                <div class="swiper-slide">
+                    <div class="relative w-full h-[16rem] min-[480px]:h-[20rem] md:h-[30rem]">
+                        <img src="{{ asset('storage/' . $game->landscape_image_path) }}" class="absolute inset-0 w-full h-full object-cover rounded-lg" alt="{{ $game->name }}">
+                        <div class="flex bg-gradient-to-t from-black/85 from-10% to-transparent to-100% absolute inset-0 w-full h-full">
+                            <div class="mt-auto mb-8 ms-8 text-start">
+                                <h1 class="font-bold text-lg min-[420px]:text-xl sm:text-2xl text-white">{{ $game->name }}</h1>
+                                <p class="mb-4">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                                <a href="#" class="px-4 py-2 bg-accent hover:bg-primary transition text-white rounded-lg mt-4">Buy Now</a>
+                            </div>
                         </div>
                     </div>
+                </div>
+                @endforeach
             </div>
-            @endfor
-        </div>
-        <div class="swiper-pagination"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <!-- Potrait Game Display -->

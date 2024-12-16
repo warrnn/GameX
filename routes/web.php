@@ -32,10 +32,10 @@ Route::post('/register', [UserAuthController::class, 'register'])->name('guest.r
 Route::prefix('')->group(function () {
     // Store
     Route::get('/store', [RoutesController::class, 'store'])->name('buyer.store');
-    Route::get('/detail/{id}', [RoutesController::class, 'detail'])->name('buyer.detail');
-    Route::get('/payment/{id}', [RoutesController::class, 'payment'])->name('buyer.payment');
+    Route::get('/detail/{game_id}', [RoutesController::class, 'detail'])->name('buyer.detail');
+    Route::get('/payment/{game_id}', [RoutesController::class, 'payment'])->name('buyer.payment');
     Route::get('/store/offers', [RoutesController::class, 'offers'])->name('buyer.offers');
-    Route::get('/category/{name}', [RoutesController::class, 'category'])->name('buyer.category');
+    Route::get('/category/{category_id}', [RoutesController::class, 'category'])->name('buyer.category');
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
@@ -92,4 +92,6 @@ Route::prefix('admin')->group(function () {
 
     // Admins
     Route::get('/admins', [RoutesController::class, 'admins'])->name('admin.admins');
+    Route::post('/addadmin', [AdminController::class, 'addAdmin'])->name('admin.addAdmin');
+    Route::delete('/deleteadmin/{admin_id}', [AdminController::class, 'deleteAdmin'])->name('admin.deleteAdmin');
 });

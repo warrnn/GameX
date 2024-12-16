@@ -32,9 +32,13 @@
                 <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="h-32 object-cover rounded-lg drop-shadow-lg" alt="Landscape Dummy">
                 <h2 class="text-2xl md:text-3xl font-bold text-white ms-4 mt-6 md:mt-0">Far Cry 5</h2>
             </div>
-            <div class="flex flex-col">
-                <h2 class="text-3xl font-bold text-white my-6 text-center md:text-start">Community Posts</h2>
-                <div class="flex flex-col md:me-8 space-y-4">
+            <div class="flex flex-col me-8">
+                <div class="flex flex-col sm:flex-row w-full items-center">
+                    <h2 class="text-3xl font-bold text-white my-6 text-center md:text-start">Community Posts</h2>
+                    <button class="mx-auto mb-8 sm:mb-0 sm:me-0 sm:ms-auto btn bg-teritary text-white hover:bg-accent hover:text-black" onclick="add_post_modal.showModal()">Post +</button>
+                    @include('buyer.includes.add_post_modal')
+                </div>
+                <div class="flex flex-col space-y-4">
                     @for ($i = 0; $i < 12; $i++)
                         <div class="flex flex-col space-y-2 bg-primary rounded-lg p-6 drop-shadow-lg" data-aos="fade-up">
                         <h1 class="text-white font-bold text-xl">apaajaboleh</h1>
