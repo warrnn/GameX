@@ -53,6 +53,11 @@ class RoutesController extends Controller
         return view('buyer.contents.store.payment', compact('page_title'));
     }
 
+    public function paymentProcess(){
+        $page_title = 'GameX | Payment';
+        return view('buyer.contents.store.midtrans', compact('page_title'));
+    }
+
     public function offers()
     {
         $page_title = 'GameX | Offers';

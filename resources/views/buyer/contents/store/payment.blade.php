@@ -3,7 +3,7 @@
 @section('content')
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/payment/inputFile.css') }}">
-<script src="{{ asset('js/payment/payment.js') }}"></script>
+{{-- <script src="{{ asset('js/payment/payment.js') }}"></script> --}}
 
 <section class="h-auto py-16 mx-8 lg:mx-32">
     <div>
@@ -21,7 +21,8 @@
         </div>
         <!-- Buy Now Button & Information -->
         <div class="lg:col-span-2">
-            <form action="" class="flex flex-col gap-4">
+            <form action="{{ route('buyer.midtrans') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
                 <div class="flex flex-col space-y-2">
                     <label for="name">Name</label>
                     <label class="input input-bordered flex items-center gap-2">
@@ -62,7 +63,7 @@
                     </label>
                 </div>
 
-                <div class="flex flex-col space-y-2">
+                {{-- <div class="flex flex-col space-y-2">
                     <label for="payment">Upload your Payment Proof</label>
                     <div class="form-group">
                         <label id="inputBorder" class="label flex items-center">
@@ -71,11 +72,12 @@
                             <input id="paymentProof" type="file" class="outline-0 opacity-0 pointer-events-none select-none"/>
                         </label>
                     </div>
-                </div>
+                </div> --}}
 
-                <input type="submit" value="Buy!" class="btn w-full bg-primary hover:bg-accent hover:text-black transition" disabled>
+                <input type="submit" id="pay-button" value="Buy!" class="btn w-full bg-primary hover:bg-accent hover:text-black transition">
             </form>
         </div>
     </div>
 </section>
+
 @endsection
