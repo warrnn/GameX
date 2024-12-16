@@ -15,8 +15,8 @@ class Communities extends Model
     protected $table = "communities";
     protected $primaryKey = "id";
     protected $fillable = [
+        "id",
         "name",
-        "description",
         "related_game",
         "image_path",
     ];

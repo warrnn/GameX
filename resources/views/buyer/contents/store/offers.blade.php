@@ -22,7 +22,7 @@
     <!-- Discounted Games List -->
     <section class="h-auto flex flex-wrap justify-around gap-8 mt-8 pb-32">
         @foreach ($sales_game as $sale_game)
-            <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up">
+        <a href="{{ route('buyer.detail', 'lorem') }}" class="drop-shadow-lg" data-aos="fade-up">
             <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
                 <img src="{{ asset('storage/' . $sale_game->portrait_image_path) }}" alt="{{ $sale_game->name }}" class="rounded-lg h-52 sm:h-[17.1rem]">
                 <div class="flex flex-col w-full">
@@ -36,8 +36,11 @@
                     </div>
                 </div>
             </div>
-            </a>
-            @endforeach
+        </a>
+        @endforeach
+        @if($sales_game->isEmpty())
+        <h1 class="text-2xl text-accent py-32">Discounted Games Soon!</h1>
+        @endif
     </section>
 </section>
 @endsection

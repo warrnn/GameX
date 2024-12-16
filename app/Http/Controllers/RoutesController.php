@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Admins;
 use App\Models\Categories;
+use App\Models\Communities;
 use App\Models\Detail_joins;
 use App\Models\Game_owneds;
 use App\Models\Games;
+use App\Models\Posts;
 use App\Models\Sales;
 use App\Models\Sell_details;
 use App\Models\Sellers;
@@ -60,7 +62,8 @@ class RoutesController extends Controller
         return view('buyer.contents.store.payment', compact('page_title'));
     }
 
-    public function paymentProcess(){
+    public function paymentProcess()
+    {
         $page_title = 'GameX | Payment';
         return view('buyer.contents.store.midtrans', compact('page_title'));
     }
@@ -87,32 +90,60 @@ class RoutesController extends Controller
         return view('buyer.contents.store.category', compact('page_title', 'category_name', 'games'));
     }
 
-    public function community()
+    public function community(Request $request)
     {
         $page_title = 'GameX | Community';
+        $communities = Communities::withCount('detail_joins as member_count')->get();
+        $joined_communities = Communities::select('*', 'communities.id')
+            ->join('detail_joins', 'detail_joins.community_id', '=', 'communities.id')
+            ->where('detail_joins.user_id', $request->session()->get('user_id'))
+            ->withCount('detail_joins as member_count')
+            ->get();
+        $posts = Posts::select("*", "users.name as user_name", "communities.name as community_name")
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->join('communities', 'communities.id', '=', 'posts.community_id')
+            ->get();
 
-        return view('buyer.contents.community.community', compact('page_title'));
+        return view('buyer.contents.community.community', compact('page_title', 'communities', 'joined_communities', 'posts'));
     }
 
     public function theComunities()
     {
         $page_title = 'GameX | The Communities';
+        $communities = Communities::withCount('detail_joins as member_count')->get();
 
-        return view('buyer.contents.community.the_communities', compact('page_title'));
+        return view('buyer.contents.community.the_communities', compact('page_title', 'communities'));
     }
 
-    public function myComunities()
+    public function myComunities(Request $request)
     {
         $page_title = 'GameX | My Communities';
+        $joined_communities = Communities::select('*', 'communities.id')
+            ->join('detail_joins', 'detail_joins.community_id', '=', 'communities.id')
+            ->where('detail_joins.user_id', $request->session()->get('user_id'))
+            ->withCount('detail_joins as member_count')
+            ->get();
 
-        return view('buyer.contents.community.my_communities', compact('page_title'));
+        return view('buyer.contents.community.my_communities', compact('page_title', 'joined_communities'));
     }
 
-    public function detailCommunity()
+    public function detailCommunity(Request $request)
     {
         $page_title = 'GameX | Detail Community';
 
-        return view('buyer.contents.community.detail', compact('page_title'));
+        $community_id = $request->community_id;
+        $community = Communities::where('id', $community_id)->withCount('detail_joins as member_count')->first();
+        $isJoined = Detail_joins::where('user_id', $request->session()->get('user_id'))->where('community_id', $community_id)->exists();
+        $socials = Users::select('*')
+            ->join('detail_joins', 'detail_joins.user_id', '=', 'users.id')
+            ->where('detail_joins.community_id', $community_id)
+            ->get();
+        $posts = Posts::select("*")
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->where('posts.community_id', $community_id)
+            ->get();
+
+        return view('buyer.contents.community.detail', compact('page_title', 'community', 'isJoined', 'socials', 'posts'));
     }
 
     public function games()

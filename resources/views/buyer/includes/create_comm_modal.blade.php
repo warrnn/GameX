@@ -2,7 +2,7 @@
     <div class="modal-box bg-neutral">
         <h3 class="text-lg font-bold mb-4">Create New Community</h3>
         <div class="py-2">
-            <form action="{{ route('community.store') }}" method="POST" class="flex flex-col gap-4">
+            <form action="{{ route('buyer.addCommunity') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4">
                 @csrf
                 <div class="space-y-2">
                     <label for="">Community Picture</label>
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="flex flex-col space-y-2">
-                    <label for="">Community Picture</label>
+                    <label for="">Community Description</label>
                     <textarea type="text" name="description" class="textarea textarea-bordered" placeholder="Community Description"></textarea>
                 </div>
 

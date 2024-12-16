@@ -46,10 +46,13 @@ Route::prefix('')->middleware('isLogin')->group(function () {
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
-    Route::post('/community', [CommunityController::class, 'addCommunity'])->name('community.store');
+    Route::post('/addcommunity', [CommunityController::class, 'addCommunity'])->name('buyer.addCommunity');
     Route::get('/thecomunities', [RoutesController::class, 'theComunities'])->name('buyer.theComunities');
     Route::get('/mycomunities', [RoutesController::class, 'myComunities'])->name('buyer.myComunities');
-    Route::get('/detailCommunity/{id}', [RoutesController::class, 'detailCommunity'])->name('buyer.detailCommunity');
+    Route::get('/detailCommunity/{community_id}', [RoutesController::class, 'detailCommunity'])->name('buyer.detailCommunity');
+    Route::post('/joincommunity/{community_id}', [CommunityController::class, 'joinCommunity'])->name('buyer.joinCommunity');
+    Route::put('/leavecommunity/{community_id}', [CommunityController::class, 'leaveCommunity'])->name('buyer.leaveCommunity');
+    Route::post('/addpost/{community_id}', [CommunityController::class, 'addPost'])->name('buyer.addPost');
 
     // Games
     Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');

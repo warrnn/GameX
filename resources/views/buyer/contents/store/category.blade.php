@@ -36,6 +36,9 @@
                 </div>
             </a>
             @endforeach
+            @if($games->isEmpty())
+            <h1 class="text-2xl text-accent py-52">No {{ $category_name }} games found.</h1>
+            @endif
         </div>
     </section>
 </section>
