@@ -29,13 +29,13 @@ Route::post('/login', [UserAuthController::class, 'login'])->name('guest.login')
 Route::post('/register', [UserAuthController::class, 'register'])->name('guest.register');
 
 // Buyer
-Route::prefix('')->group(function () {
+Route::prefix('')->middleware('isLogin')->group(function () {
     // Store
     Route::get('/store', [RoutesController::class, 'store'])->name('buyer.store');
     Route::get('/detail/{game_id}', [RoutesController::class, 'detail'])->name('buyer.detail');
     Route::get('/payment/{game_id}', [RoutesController::class, 'payment'])->name('buyer.payment');
     Route::get('/store/offers', [RoutesController::class, 'offers'])->name('buyer.offers');
-    Route::get('/category/{category_id}', [RoutesController::class, 'category'])->name('buyer.category');
+    Route::get('/category/{category_name}', [RoutesController::class, 'category'])->name('buyer.category');
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
@@ -50,12 +50,13 @@ Route::prefix('')->group(function () {
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
     Route::put('/changename/{user_id}', [ProfileController::class, 'changeName'])->name('buyer.changeName');
+    Route::put('/changedata', [ProfileController::class, 'changeData'])->name('buyer.changeData');
     Route::post('/registasseller', [BuyerController::class, 'registAsSeller'])->name('buyer.registAsSeller');
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('buyer.logout');
 });
 
 // Seller
-Route::prefix('seller')->group(function () {
+Route::prefix('seller')->middleware('isSeller')->group(function () {
     // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
     Route::get('/managegame/{id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
@@ -74,7 +75,7 @@ Route::prefix('seller')->group(function () {
 });
 
 // Admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('isAdmin')->group(function () {
     // Users
     Route::get('/userslist', [RoutesController::class, 'usersList'])->name('admin.usersList');
 

@@ -54,14 +54,17 @@
         <!-- Potrait Game Display -->
         <div class="col-span-2 place-self-start self-center hidden lg:block">
             <ul class="space-y-4">
-                @for ($i = 0; $i < 3; $i++)
-                    <li>
+                @foreach ($games as $game)
+                @if ($loop->iteration == 4)
+                @break
+                @endif
+                <li>
                     <a href="#" class="flex items-center hover:scale-[0.98] transition drop-shadow-lg">
-                        <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="h-24 xl:h-[9.2rem] object-cover rounded-lg">
-                        <p class="ms-4 text-white">Horizon: Zero Dawn</p>
+                        <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="{{ $game->name }}" class="w-28 h-24 xl:h-[9.2rem] object-cover rounded-lg">
+                        <p class="ms-4 text-white">{{ $game->name }}</p>
                     </a>
-                    </li>
-                    @endfor
+                </li>
+                @endforeach
             </ul>
         </div>
     </section>
@@ -75,21 +78,26 @@
             </a>
         </div>
         <div class="flex mt-6 flex-wrap justify-around gap-6 sm:gap-6">
-            @for ($i = 0; $i < 6; $i++)
-                <a href="#" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
+            @foreach ($sales_game as $sale_game)
+            @if ($loop->iteration == 7)
+            @break
+            @endif
+            <a href="{{ route('buyer.detail', $sale_game->id) }}" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
-                    <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-64 sm:h-[17.1rem]">
+                    <img src="{{ asset('storage/' . $sale_game->portrait_image_path) }}" alt="{{ $sale_game->name }}" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full">
-                        <p class="text-lg font-bold text-white truncate max-w-44">Horizon: Zero Dawn</p>
-                        <p class="line-through text-strike">IDR 400.000</p>
+                        <p class="text-lg font-bold text-white truncate max-w-44">{{ $sale_game->name }}</p>
+                        <p class="line-through text-strike">IDR {{ number_format($sale_game->price, 0, ',', '.') }}</p>
                         <div class="flex items-center">
-                            <p class="text-white">IDR 100.000</p>
-                            <p class="ms-auto bg-accent p-1 rounded-lg text-xs text-white">75%</p>
+                            <p class="text-white">
+                                IDR {{ number_format(($sale_game->price - ($sale_game->price * $sale_game->discount / 100)), 0, ',', '.') }}
+                            </p>
+                            <p class="ms-auto bg-accent p-1 rounded text-xs text-white">{{ $sale_game->discount }}%</p>
                         </div>
                     </div>
                 </div>
-                </a>
-                @endfor
+            </a>
+            @endforeach
         </div>
     </section>
 
