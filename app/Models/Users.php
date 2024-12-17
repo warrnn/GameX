@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Users extends Model
@@ -31,18 +32,18 @@ class Users extends Model
         return $this->hasMany(Detail_joins::class, 'user_id', 'id');
     }
 
-    public function buyer(): MorphOne
+    public function buyer(): HasOne
     {
-        return $this->morphOne(Buyers::class, 'buyerable');
+        return $this->hasOne(Buyers::class, 'buyerable');
     }
 
-    public function seller(): MorphOne
+    public function seller(): HasOne
     {
-        return $this->morphOne(Sellers::class, 'sellerable');
+        return $this->hasOne(Sellers::class, 'sellerable');
     }
 
-    public function admin(): MorphOne
+    public function admin(): HasOne
     {
-        return $this->morphOne(Admins::class, 'adminable');
+        return $this->hasOne(Admins::class, 'adminable');
     }
 }

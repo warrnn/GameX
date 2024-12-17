@@ -32,7 +32,8 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <img src="{{ asset('storage/' . $user->profile_photo_path) }}" class="w-16 h-16 border rounded-full object-center" alt="User Profile Photo">
+                        <!-- <img src="{{ asset('storage/' . $user->profile_photo_path) }}" class="w-16 h-16 border rounded-full object-center" alt="User Profile Photo"> -->
+                        <img src="https://avatar.iran.liara.run/public/17" class="w-16 h-16 border rounded-full object-center" alt="User Profile Photo">
                     </td>
                 </tr>
                 @endforeach

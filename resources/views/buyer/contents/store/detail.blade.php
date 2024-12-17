@@ -23,10 +23,16 @@
             <!-- Buy Now Button & Information -->
             <div class="lg:col-span-2">
                 <div>
+                    @if(!$game->discount)
                     <h2 class="text-2xl font-bold text-white">IDR {{ number_format($game->price, 0, ',', '.') }}</h2>
+                    @else
+                    <h2 class="text-2xl font-bold text-white flex items-center">IDR {{ number_format($game->price - ($game->price * $game->discount / 100), 0, ',', '.') }} <span class="text-xs p-1 bg-accent rounded-lg ms-2 mb-1">{{ $game->discount }}%</span></h2>
+                    <p class="text-strike line-through">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                    @endif
                 </div>
 
-                @if ($game->seller_user_id != session('user_id'))
+
+                @if ($game->seller_user_id != session('user_id') && !$userOwnTheGame)
                 <div class="mt-1">
                     <a href="{{ route('buyer.payment', $game->id) }}" class="btn w-full mt-2 bg-accent text-white hover:bg-teritary transition">Buy Now</a>
                 </div>

@@ -27,8 +27,8 @@ class Buyers extends Model
         return $this->hasMany(Transactions::class, 'buyer_id', 'id');
     }
     
-    public function buyerable(): MorphTo
+    public function buyerable(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Users::class, 'user_id', 'id');
     }
 }

@@ -9,7 +9,7 @@
 <script>
     Swal.fire({
         icon: 'success',
-        title: '{{ session('success') }}',
+        title: '{{ session('success ') }}',
         confirmButtonColor: '#8B1E3F',
     })
 </script>
@@ -18,7 +18,7 @@
 <script>
     Swal.fire({
         icon: 'error',
-        title: '{{ session('error') }}',
+        title: '{{ session('error ') }}',
         confirmButtonColor: '#8B1E3F',
     })
 </script>
@@ -35,7 +35,14 @@
                 <img src="{{ asset('storage/' . $game->landscape_image_path) }}" class="w-full h-auto object-cover rounded-lg drop-shadow-lg" alt="Portrait Dummy">
             </div>
             <div class="mt-4 flex justify-center lg:justify-end">
-                <h3 class="font-bold text-white text-2xl lg:text-3xl">IDR {{ number_format($game->price, 0, ',', '.') }}</h3>
+                @if(!$game->discount)
+                <h2 class="text-2xl font-bold text-white">IDR {{ number_format($game->price, 0, ',', '.') }}</h2>
+                @else
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center">IDR {{ number_format($game->price - ($game->price * $game->discount / 100), 0, ',', '.') }} <span class="text-xs p-1 bg-accent rounded-lg ms-2 mb-1">{{ $game->discount }}%</span></h2>
+                    <p class="text-strike line-through text-center lg:text-end">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                </div>
+                @endif
             </div>
         </div>
         <!-- Buy Now Button & Information -->

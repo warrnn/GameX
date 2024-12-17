@@ -15,6 +15,7 @@ use App\Models\Sellers;
 use App\Models\Transactions;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Midtrans\Transaction;
 
@@ -45,25 +46,32 @@ class RoutesController extends Controller
     public function detail(Request $request)
     {
         $page_title = 'GameX | Detail';
-        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name', 'user_id as seller_user_id')
+        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name', 'user_id as seller_user_id', 'sales.discount')
             ->join('categories', 'categories.id', '=', 'games.category_id')
             ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
             ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
             ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->leftjoin('sales', 'sales.game_id', '=', 'games.id')
             ->where('games.id', $request->game_id)
             ->first();
+            
+            // dd($game);
+            
+        $userOwnTheGame = Game_owneds::where('user_id', $request->session()->get('user_id'))->where('game_id', $request->game_id)->exists();
 
-        return view('buyer.contents.store.detail', compact('page_title', 'game'));
+
+        return view('buyer.contents.store.detail', compact('page_title', 'game', 'userOwnTheGame'));
     }
 
     public function payment(Request $request)
     {
         $page_title = 'GameX | Payment';
-        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name')
+        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name', 'user_id as seller_user_id', 'sales.discount')
             ->join('categories', 'categories.id', '=', 'games.category_id')
             ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
             ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
             ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->leftjoin('sales', 'sales.game_id', '=', 'games.id')
             ->where('games.id', $request->game_id)
             ->first();
         return view('buyer.contents.store.payment', compact('page_title', 'game'));
@@ -91,8 +99,11 @@ class RoutesController extends Controller
         $page_title = 'GameX | ' . strtoupper($category_name);
         $games = Games::select('*', 'games.id', 'games.name')
             ->join('categories', 'categories.id', '=', 'games.category_id')
+            ->leftjoin('sales', 'sales.game_id', '=', 'games.id')
             ->where('categories.name', $category_name)
             ->get();
+
+            // dd($games);
 
         return view('buyer.contents.store.category', compact('page_title', 'category_name', 'games'));
     }
@@ -157,9 +168,9 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX | My Games';
         $games_owned = Games::select('*', 'game_id')
-        ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
-        ->where('game_owneds.user_id', $request->session()->get('user_id'))
-        ->get();
+            ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+            ->where('game_owneds.user_id', $request->session()->get('user_id'))
+            ->get();
 
         return view('buyer.contents.games.games', compact('page_title', 'games_owned'));
     }
@@ -176,18 +187,27 @@ class RoutesController extends Controller
         $page_title = 'GameX | Profile';
         $current_user = Users::where('id', $request->session()->get('user_id'))->first();
         $user_id = $request->session()->get('user_id');
-        
-        $games = Game_owneds::with('games')->where('user_id', $user_id)->get();
+
+        $games = Games::select('*', 'games.id', 'games.name', 'game_owneds.created_at as owned_date')
+            ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+            ->where('game_owneds.user_id', $user_id)
+            ->get();
         // dd($games);
-        $communities = Detail_joins::with('communities')->where('user_id', $user_id)->get();
+        $communities = Communities::select('*', 'detail_joins.created_at as join_date')
+            ->join('detail_joins', 'detail_joins.community_id', '=', 'communities.id')
+            ->where('detail_joins.user_id', $user_id)
+            ->get();
+
+        // dd($communities);
+
         // $transaction_date = Transactions:: ;
-        
+
         $games_count = $games->count();
         $communities_count = $communities->count();
         $isSeller = Sellers::where('user_id', $request->session()->get('user_id'))->exists();
 
         if (Sellers::where('user_id', $request->session()->get('user_id'))->exists()) {
-            return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'games_count', 'communities_count', 'isSeller'));
+            return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'games', 'communities', 'games_count', 'communities_count', 'isSeller'));
         }
 
         $kabKota = $this->getKabKotaAPI();
@@ -195,7 +215,7 @@ class RoutesController extends Controller
         return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota', 'games', 'communities', 'games_count', 'communities_count', 'isSeller'));
     }
 
-    
+
 
     public function sellGames(Request $request)
     {
@@ -236,12 +256,12 @@ class RoutesController extends Controller
     public function transactionProcesses(Request $request)
     {
         $page_title = 'GameX | Transaction Processes';
-      
+
         $transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name')
-        ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
-        ->join('users', 'users.id', '=', 'buyers.user_id')
-        ->join('games', 'games.id', '=', 'transactions.game_id')
-        ->get();
+            ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
+            ->join('users', 'users.id', '=', 'buyers.user_id')
+            ->join('games', 'games.id', '=', 'transactions.game_id')
+            ->get();
 
         return view('seller.contents.store.transaction_processes', compact('page_title', 'transactions'));
     }
@@ -281,8 +301,17 @@ class RoutesController extends Controller
     public function transactions()
     {
         $page_title = 'GameX | Transactions';
-        $transactions = Transactions::all();
-        return view('admin.contents.transactions.transactions', compact('page_title', 'transactions'));
+        $transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'transactions.status')
+            ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
+            ->join('sellers', 'sellers.id', '=', 'transactions.seller_id')
+            ->join('users', 'users.id', '=', 'buyers.user_id')
+            ->join('games', 'games.id', '=', 'transactions.game_id')
+            ->get();
+
+        $sellers = Sellers::select("*", 'sellers.id')
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->get();
+        return view('admin.contents.transactions.transactions', compact('page_title', 'transactions', 'sellers'));
     }
 
     public function categories()

@@ -31,7 +31,17 @@
                     <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="{{ $game->name }}" class="rounded-lg h-52 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full">
                         <p class="text-lg font-bold text-white truncate max-w-48">{{ $game->name }}</p>
-                        <p class="text-strike">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                        @if (!$game->discount)
+                        <p class="text-white">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                        @else
+                        <p class="line-through text-strike">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                        <div class="flex items-center">
+                            <p class="text-white">
+                                IDR {{ number_format(($game->price - ($game->price * $game->discount / 100)), 0, ',', '.') }}
+                            </p>
+                            <p class="ms-auto bg-accent p-1 rounded-lg text-xs text-white">{{ $game->discount }}%</p>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </a>

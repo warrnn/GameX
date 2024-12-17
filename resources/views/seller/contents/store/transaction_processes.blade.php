@@ -54,11 +54,11 @@
                     </td>
                     <td>
                         <div class="dropdown dropdown-left">
-                            @if ($transaction->status == 'SUCCESS' && $transaction->shipping_number != null)
+                            @if ($transaction->status == 'SUCCESS' && !$transaction->shipping_number)
                             <div tabindex="0" role="button" class="btn m-1 text-white btn-success">{{ $transaction->status }}</div>
                             @elseif ($transaction->status == 'PROCESS')
                             <div tabindex="0" role="button" class="btn m-1 text-white btn-primary">{{ $transaction->status }}</div>
-                            @elseif ($transaction->status == 'DELIVERY' && $transaction->shipping_number != null)
+                            @elseif ($transaction->status == 'DELIVERY' && $transaction->shipping_number)
                             <div tabindex="0" role="button" class="btn m-1 text-white btn-warning">{{ $transaction->status }}</div>
                             @elseif ($transaction->status == 'FAILED')
                             <div tabindex="0" role="button" class="btn m-1 text-white btn-error">{{ $transaction->status }}</div>

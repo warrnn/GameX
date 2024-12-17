@@ -18,8 +18,8 @@ class Admins extends Model
         'user_id',
     ];
 
-    public function adminable(): MorphTo
+    public function adminable(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Users::class, 'user_id', 'id');
     }
 }

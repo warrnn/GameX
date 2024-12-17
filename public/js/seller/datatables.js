@@ -110,9 +110,11 @@ $(document).ready(function () {
         autoWidth: true,
         columns: [
             { data: "transaction_date", title: "Transaction Date" },
-            { data: "shipping_number", title: "Shipping Number" },
+            { data: "game_name", title: "Game" },
+            { data: "buyer_name", title: "Buyer" },
+            { data: "seller_name", title: "Seller" },
+            { data: "shipping_number", title: "Shipping Number", orderable: false },
             { data: "status", title: "Status" },
-            { data: "actions", title: "Actions", orderable: false },
         ],
     });
 
