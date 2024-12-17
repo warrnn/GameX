@@ -2,26 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buyers;
+use App\Models\Games;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Ramsey\Uuid\Uuid;
 
 class TransactionController extends Controller
 {
     public function process(Request $request)
     {
 
-        // $request->validate(
+        try {
+            $request->validate(
+                [
+                    'name' => 'required',
+                    'city' => 'required',
+                    'address' => 'required',
+                    'phone' => 'required',
+                    'game_id' => 'required|exists:games,id'
+                ]
+            );
+        } catch (\Throwable $th) {
+            Log::error('Error validate', ['error' => $th->getMessage()]);
+            return redirect()->back()->with('error', $th->getMessage());
+        }
 
-        // );
+        $game = Games::select('games.*', 'sellers.id as seller_id')
+                ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
+                ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
+                ->where('games.id', $request->game_id)
+                ->first();
 
-        // $transaction = Transactions::create(
-        //     [
+        $user_id = $request->session()->get('user_id');
 
-        //     ]
-        // );
+        $buyer = Buyers::create(
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'domicile' => $request->city,
+                'user_id' => $user_id        
+            ]
+        );
+
+        $transaction = Transactions::create(
+            [
+                'id' => Uuid::uuid4()->toString(),
+                'transaction_date' => now(),
+                'shipping_number' => uniqid(),
+                'status' => 'PROCESS',
+                'buyer_id' => $buyer->id,
+                'seller_id' => $game->seller_id,
+                'game_id' => $request->game_id,
+            ]
+        );
 
         Config::$serverKey = config('midtrans.serverKey');
         Config::$clientKey = config('midtrans.clientKey');
@@ -31,25 +69,19 @@ class TransactionController extends Controller
 
         // Parameter transaksi harcode
         $transactionDetails = [
-            'order_id' => 'ordercoba2', // uniqe order id
-            'gross_amount' => 700000, // -> harga game
+            'order_id' => $transaction->id, 
+            'gross_amount' => $game->price, 
         ];
 
 
         $customerDetails = [
-            'first_name' => 'Sukri',
-            'email' => 'sukri@gmail.com',
-            'phone' => '0812341251234',
-            // 'billing_address' => [ // -> optional
-            //     'first_name' => 'Sukri',
-            //     'address' => 'Jl. Siwalankerto',
-            //     'city' => 'Surabaya'
-            // ],
-            // 'shipping_address' => [ // -> optional
-            //     'first_name' => 'Sukri',
-            //     'address' => 'Jl. Siwalankerto',
-            //     'city' => 'Surabaya'
-            // ]
+            'first_name' => $request->name,
+            'phone' => $request->phone,
+            'billing_address' => [
+                'address' => $request->address,
+                'city' => $request->city,
+            ],
+            
         ];
 
         $params = [

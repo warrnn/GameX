@@ -18,6 +18,8 @@ class Buyers extends Model
     protected $fillable = [
         'address',
         'phone',
+        'domicile',
+        'user_id'
     ];
 
     public function transactions(): HasMany
