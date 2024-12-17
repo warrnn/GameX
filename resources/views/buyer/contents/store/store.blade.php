@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
 <script src="{{ asset('js/swiper/carousel.js') }}"></script>
 
+
 <section class="mx-8 sm:mx-20">
     <!-- Search -->
     <section class="mt-8">

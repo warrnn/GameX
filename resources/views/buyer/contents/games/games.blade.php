@@ -1,6 +1,7 @@
 @extends('buyer.base')
 
 @section('content')
+<script src="{{asset('js/search.js')}}"></script>
 <!-- @if(session('success'))
 <script>
     Swal.fire({

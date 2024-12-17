@@ -57,6 +57,7 @@ Route::prefix('')->middleware('isLogin')->group(function () {
     // Games
     Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');
     Route::get('/play', [RoutesController::class, 'play'])->name('buyer.play');
+    Route::get('/search', [RoutesController::class, 'search'])->name('buyer.search');
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
