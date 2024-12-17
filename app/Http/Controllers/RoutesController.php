@@ -55,11 +55,17 @@ class RoutesController extends Controller
         return view('buyer.contents.store.detail', compact('page_title', 'game'));
     }
 
-    public function payment()
+    public function payment(Request $request)
     {
         $page_title = 'GameX | Payment';
-
-        return view('buyer.contents.store.payment', compact('page_title'));
+        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name')
+            ->join('categories', 'categories.id', '=', 'games.category_id')
+            ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
+            ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->where('games.id', $request->game_id)
+            ->first();
+        return view('buyer.contents.store.payment', compact('page_title', 'game'));
     }
 
     public function paymentProcess()
