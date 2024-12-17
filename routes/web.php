@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\SellerProfileController;
 use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserAuthController;
@@ -23,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 // composer install --ignore-platform-reqs
 // php artisan storage:link
+// composer require midtrans/midtrans-php --ignore-platform-reqs
+
 
 // Guest
 Route::get('/', [RoutesController::class, 'index'])->name('guest.index');
@@ -42,9 +46,13 @@ Route::prefix('')->middleware('isLogin')->group(function () {
 
     // Community
     Route::get('/community', [RoutesController::class, 'community'])->name('buyer.community');
+    Route::post('/addcommunity', [CommunityController::class, 'addCommunity'])->name('buyer.addCommunity');
     Route::get('/thecomunities', [RoutesController::class, 'theComunities'])->name('buyer.theComunities');
     Route::get('/mycomunities', [RoutesController::class, 'myComunities'])->name('buyer.myComunities');
-    Route::get('/detailCommunity/{id}', [RoutesController::class, 'detailCommunity'])->name('buyer.detailCommunity');
+    Route::get('/detailCommunity/{community_id}', [RoutesController::class, 'detailCommunity'])->name('buyer.detailCommunity');
+    Route::post('/joincommunity/{community_id}', [CommunityController::class, 'joinCommunity'])->name('buyer.joinCommunity');
+    Route::put('/leavecommunity/{community_id}', [CommunityController::class, 'leaveCommunity'])->name('buyer.leaveCommunity');
+    Route::post('/addpost/{community_id}', [CommunityController::class, 'addPost'])->name('buyer.addPost');
 
     // Games
     Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');
@@ -62,7 +70,8 @@ Route::prefix('')->middleware('isLogin')->group(function () {
 Route::prefix('seller')->middleware('isSeller')->group(function () {
     // Store
     Route::get('/sellgames', [RoutesController::class, 'sellGames'])->name('seller.sellGames');
-    Route::get('/managegame/{id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::get('/managegame/{game_id?}', [RoutesController::class, 'manageGame'])->name('seller.manageGame');
+    Route::put('/updategame/{game_id}', [SellGamesController::class, 'updateGame'])->name('seller.updateGame');
     Route::delete('/deletegame/{seller_id}/{game_id}', [SellGamesController::class, 'deleteGame'])->name('seller.deleteGame');
     Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
 
@@ -75,6 +84,7 @@ Route::prefix('seller')->middleware('isSeller')->group(function () {
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'sellerProfile'])->name('seller.profile');
+    Route::put('/changedata', [SellerProfileController::class, 'sellerChangeData'])->name('seller.changeData');
 });
 
 // Admin

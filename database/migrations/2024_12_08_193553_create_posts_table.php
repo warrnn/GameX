@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid("id")->primary();
-            $table->string("value");
+            $table->text("content");
             $table->uuid("user_id");
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
             $table->uuid("community_id");

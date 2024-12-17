@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Sellers;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
 
-class BuyerController extends Controller
+class SellerProfileController extends Controller
 {
-    public function registAsSeller(Request $request)
+    public function sellerChangeData(Request $request)
     {
         try {
             $request->validate([
@@ -24,20 +23,20 @@ class BuyerController extends Controller
         $address = $request->address;
         $phone = $request->phone;
 
-        if (Sellers::where('phone', $phone)->exists()) {
-            return redirect()->back()->with('error', 'Phone number already exists');
-        }
-
-        $uuid = Uuid::uuid4()->toString();
-        Sellers::create([
-            'id' => $uuid,
+        Sellers::where('id', $this->getUserSellerId($request))->update([
             'domicile' => $domicile,
             'address' => $address,
-            'phone' => $phone,
-            'user_id' => $request->session()->get('user_id'),
-            'status' => 'INACTIVE'
+            'phone' => $phone
         ]);
 
-        return redirect()->route('buyer.profile')->with('success', 'Seller Account created, please wait for admin approval');
+        return redirect()->route('seller.profile')->with('success', 'Your Seller Data Updated Successfully');
+    }
+
+    public function getUserSellerId(Request $request)
+    {
+        $user_id = $request->session()->get('user_id');
+        $seller_id = Sellers::where('user_id', $user_id)->first();
+
+        return $seller_id->id;
     }
 }

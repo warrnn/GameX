@@ -20,7 +20,7 @@
 </script>
 @endif -->
 
-<section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-20">
+<section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-32">
     <section class="mt-14 flex flex-col md:flex-row items-center justify-center space-x-2">
         <form class="w-full max-w-md">
             <label for="small-search" class="mb-1 text-xs font-medium text-gray-900 sr-only">Search</label>
@@ -59,19 +59,16 @@
             <h1 class="text-3xl text-white font-semibold">The Communities</h1>
         </div>
         <div class="flex flex-wrap justify-around gap-4">
-            @php($delay = 100)
-            @for ($i = 0; $i < 30; $i++)
-                <a href="{{ route('buyer.detailCommunity', 'lorem') }}" class="mt-5 w-fit hover:scale-[0.98] transition text-center" data-aos="fade-up" data-aos-delay="{{ $delay }}">
-                <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="potrait dummy" class="size-44 object-cover rounded-lg">
-                <h1 class="text-white mt-5">Horizon Zero Dawn</h1>
-                <p>100k Members</p>
-                </a>
-                @if ($delay == 700)
-                @php($delay = 100)
-                @else
-                @php($delay += 100)
-                @endif
-                @endfor
+            @foreach ($communities as $community)
+            <a href="{{ route('buyer.detailCommunity', $community->id) }}" class="mt-5 w-fit hover:scale-[0.98] transition text-center" data-aos="fade-up">
+                <img src="{{ asset('storage/' . $community->image_path) }}" alt="{{ $community->name }}" class="size-44 object-cover rounded-lg">
+                <h1 class="text-white mt-5">{{ $community->name }}</h1>
+                <p>{{ $community->member_count }} Members</p>
+            </a>
+            @endforeach
+            @if($communities->isEmpty())
+            <h1 class="text-strike mt-5 text-lg py-64">No Communities Found</h1>
+            @endif
         </div>
     </section>
 </section>
