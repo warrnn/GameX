@@ -6,6 +6,7 @@ use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionsController;
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerProfileController;
 use App\Http\Controllers\SellGamesController;
 use App\Http\Controllers\TransactionController;
@@ -57,7 +58,6 @@ Route::prefix('')->middleware('isLogin')->group(function () {
     // Games
     Route::get('/games', [RoutesController::class, 'games'])->name('buyer.games');
     Route::get('/play', [RoutesController::class, 'play'])->name('buyer.play');
-    Route::get('/search', [RoutesController::class, 'search'])->name('buyer.search');
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'profile'])->name('buyer.profile');
@@ -113,4 +113,9 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::get('/admins', [RoutesController::class, 'admins'])->name('admin.admins');
     Route::post('/addadmin', [AdminController::class, 'addAdmin'])->name('admin.addAdmin');
     Route::delete('/deleteadmin/{admin_id}', [AdminController::class, 'deleteAdmin'])->name('admin.deleteAdmin');
+});
+
+// JSON Responses
+Route::prefix('')->middleware('isLogin')->group(function () {
+    Route::get('/searchownedgames', [SearchController::class, 'searchOwnedGames'])->name('buyer.searchOwnedGames');
 });

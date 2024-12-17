@@ -1,7 +1,6 @@
 @extends('buyer.base')
 
 @section('content')
-<script src="{{asset('js/search.js')}}"></script>
 <!-- @if(session('success'))
 <script>
     Swal.fire({
@@ -21,7 +20,7 @@
 </script>
 @endif -->
 
-<section class="h-auto mx-8 md:mx-16 mt-8 pb-20">
+<section class="h-auto mx-8 md:mx-16 mt-8 pb-44">
     <section class="flex flex-col-reverse md:flex-row items-center justify-end gap-4">
         <!-- Dropdown -->
         <select class="block w-full p-2 ps-8 text-xs text-white border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none max-w-xs">
@@ -46,7 +45,7 @@
     </section>
 
     <section class="mt-8">
-        <div class="h-auto flex flex-wrap justify-around gap-8 mt-8">
+        <div id="owned_games_results" class="h-auto flex flex-wrap justify-around gap-8 mt-8">
             @foreach ($games_owned as $game)
             <a href="{{ route('buyer.play') }}" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
@@ -62,7 +61,6 @@
                 <div class="lg:ms-20">
                     <img class="glitch h-52 lg:h-full" src="{{ asset('assets/logo/logo_light.png') }}" alt="logo light">
                 </div>
-
                 <div class="lg:ms-20 lg:me-20">
                     <h1 class="text-white font-semibold text-2xl lg:text-5xl text-center lg:text-start">You don't own any game, Let's buy some games.</h1>
                 </div>

@@ -5,27 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Games;
 use Illuminate\Http\Request;
 use db;
-
+use Illuminate\Support\Facades\Log;
 
 class SearchController extends Controller
 {
-    public function index()
+    public function searchOwnedGames(Request $request)
     {
-        return view('search');
-    }
+        if ($request->ajax()) {
+            $search = $request->input('query');
+            $user_id = $request->session()->get('user_id');
 
-    public function search(Request $request)
-    {
-        $search = $request->search;
-        $user_id = $request->session()->get('user_id');
-        $join = DB::table('games')
-            ->join('user_games', 'games.id', '=', 'user_games.game_id')
-            ->where('user_games.user_id', $user_id)
-            ->where('games.name', 'like', "%" . $search . "%")
-            ->select('games.*')
-            ->get();
-        $games = Games::where('name', 'like', "%" . $search . "%")->get();
+            $owned_games = Games::select('*')
+                ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+                ->where('game_owneds.user_id', $user_id)
+                ->where('games.name', 'like', '%' . $search . '%')
+                ->get();
 
-        return response()->json($games);
+            return view('buyer.partials.owned_games_card', compact('owned_games'))->render();
+        }
+
+        return response()->json(['error' => 'Invalid request'], 400);
     }
 }

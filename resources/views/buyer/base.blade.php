@@ -7,6 +7,8 @@
     <title>{{ $page_title }}</title>
     <link rel="icon" href="{{ asset('assets/logo/logo_dark.png') }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @include('resources')
 
     <!-- CSS -->
@@ -17,6 +19,30 @@
 </head>
 
 <body class="bg-neutral overflow-x-hidden">
+    <script>
+        $(document).ready(function() {
+            $("#small-search").on("keyup", function() {
+                let query = $(this).val();
+                $.ajax({
+                    url: '{{ route('buyer.searchOwnedGames') }}',
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(results) {
+                        $("#owned_games_results").empty();
+
+                        $("#owned_games_results").append(results);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+        });
+    </script>
+
+
     @include('buyer.includes.logged_navbar')
     <section class="pt-20">
         @yield('content')
