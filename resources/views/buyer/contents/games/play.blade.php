@@ -20,11 +20,9 @@
 </script>
 @endif -->
 
-<script src="{{ asset('js/buyer/play.js') }}"></script>
-
 <section class="flex flex-col lg:flex-row items-center justify-center h-screen">
     <div class="lg:ms-20">
-        <img class="glitch" src="{{ asset('assets/logo/logo_light.png') }}" alt="logo light">
+        <img class="glitch h-52 lg:h-full" src="{{ asset('assets/logo/logo_light.png') }}" alt="logo light">
     </div>
 
     <div class="lg:ms-20 lg:me-20">

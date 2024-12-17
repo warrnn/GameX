@@ -75,12 +75,16 @@ Route::prefix('seller')->middleware('isSeller')->group(function () {
     Route::delete('/deletegame/{seller_id}/{game_id}', [SellGamesController::class, 'deleteGame'])->name('seller.deleteGame');
     Route::post('/addgame', [SellGamesController::class, 'addGame'])->name('seller.addGame');
 
+    // Promotions
     Route::get('/managepromotion', [RoutesController::class, 'managePromotion'])->name('seller.managePromotion');
     Route::post('/adddiscount', [PromotionsController::class, 'addDiscount'])->name('seller.addDiscount');
     Route::put('/updatediscount/{sale_id}', [PromotionsController::class, 'updateDiscount'])->name('seller.updateDiscount');
     Route::delete('/deletediscount/{sale_id}', [PromotionsController::class, 'deleteDiscount'])->name('seller.deleteDiscount');
 
+    // Transactions Prcesses
     Route::get('/transactionprocesses', [RoutesController::class, 'transactionProcesses'])->name('seller.transactionProcesses');
+    Route::put('/updatetransactionstatus/{transaction_id}/{status}', [TransactionController::class, 'updateTransactionStatus'])->name('seller.updateTransactionStatus');
+    Route::put('/updatetodelivery/{transaction_id}', [TransactionController::class, 'updateTransactionDelivery'])->name('seller.updateTransactionDelivery');
 
     // Profile
     Route::get('/profile', [RoutesController::class, 'sellerProfile'])->name('seller.profile');
