@@ -153,11 +153,15 @@ class RoutesController extends Controller
         return view('buyer.contents.community.detail', compact('page_title', 'community', 'isJoined', 'socials', 'posts'));
     }
 
-    public function games()
+    public function games(Request $request)
     {
         $page_title = 'GameX | My Games';
+        $games_owned = Games::select('*', 'game_id')
+        ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+        ->where('game_owneds.user_id', $request->session()->get('user_id'))
+        ->get();
 
-        return view('buyer.contents.games.games', compact('page_title'));
+        return view('buyer.contents.games.games', compact('page_title', 'games_owned'));
     }
 
     public function play()
@@ -232,7 +236,13 @@ class RoutesController extends Controller
     public function transactionProcesses(Request $request)
     {
         $page_title = 'GameX | Transaction Processes';
-        $transactions = Transactions::all();
+      
+        $transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name')
+        ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
+        ->join('users', 'users.id', '=', 'buyers.user_id')
+        ->join('games', 'games.id', '=', 'transactions.game_id')
+        ->get();
+
         return view('seller.contents.store.transaction_processes', compact('page_title', 'transactions'));
     }
 

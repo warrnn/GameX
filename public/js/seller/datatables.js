@@ -48,7 +48,10 @@ $(document).ready(function () {
         autoWidth: true,
         columns: [
             { title: "No", orderable: false },
-            { data: "shipping_number", title: "Shipping Number" },
+            { data: "game_name", title: "Game" },
+            { data: "transaction_data", title: "Date" },
+            { data: "buyer_name", title: "Buyer" },
+            { data: "shipping_number", title: "Shipping Number", orderable: false },
             { data: "status", title: "Status" },
         ]
     });
