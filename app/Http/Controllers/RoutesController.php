@@ -16,6 +16,7 @@ use App\Models\Transactions;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Midtrans\Transaction;
 
 class RoutesController extends Controller
 {
@@ -174,8 +175,15 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX | Profile';
         $current_user = Users::where('id', $request->session()->get('user_id'))->first();
-        $games_count = Game_owneds::where('user_id', $request->session()->get('user_id'))->count();
-        $communities_count = Detail_joins::where('user_id', $request->session()->get('user_id'))->count();
+        $user_id = $request->session()->get('user_id');
+        
+        $games = Game_owneds::with('games')->where('user_id', $user_id)->get();
+        // dd($games);
+        $communities = Detail_joins::with('communities')->where('user_id', $user_id)->get();
+        // $transaction_date = Transactions:: ;
+        
+        $games_count = $games->count();
+        $communities_count = $communities->count();
         $isSeller = Sellers::where('user_id', $request->session()->get('user_id'))->exists();
 
         if (Sellers::where('user_id', $request->session()->get('user_id'))->exists()) {
@@ -184,8 +192,10 @@ class RoutesController extends Controller
 
         $kabKota = $this->getKabKotaAPI();
 
-        return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota', 'games_count', 'communities_count', 'isSeller'));
+        return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota', 'games', 'communities', 'games_count', 'communities_count', 'isSeller'));
     }
+
+    
 
     public function sellGames(Request $request)
     {
@@ -226,6 +236,7 @@ class RoutesController extends Controller
     public function transactionProcesses(Request $request)
     {
         $page_title = 'GameX | Transaction Processes';
+      
         $transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name')
         ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
         ->join('users', 'users.id', '=', 'buyers.user_id')
@@ -271,7 +282,6 @@ class RoutesController extends Controller
     {
         $page_title = 'GameX | Transactions';
         $transactions = Transactions::all();
-
         return view('admin.contents.transactions.transactions', compact('page_title', 'transactions'));
     }
 

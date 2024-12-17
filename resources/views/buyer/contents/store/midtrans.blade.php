@@ -4,7 +4,7 @@
 <section class="flex items-center justify-center min-h-screen">
     <div class="bg-white shadow-md rounded-lg p-6 w-80 text-center">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Complete Transaction</h2>
-        <button id="pay-button" class="bg-blue-500 hover:bg-blue-600 font-medium py-2 px-4 rounded">
+        <button id="pay-button" class="bg-blue-500 hover:bg-blue-600 font-medium py-2 px-4 rounded text-white">
             Pay Now
         </button>
     </div>
