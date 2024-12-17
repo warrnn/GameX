@@ -69,6 +69,10 @@
         </div>
     </section>
 
+    @if($games->isEmpty())
+    <h1 class="text-white font-bold mt-5 text-4xl py-8 text-center mx-auto glitch">Welcome to Game<span class="text-accent">X</span></h1>
+    @endif
+
     <!-- Special Offers -->
     <section class="h-auto mt-8">
         <div class="flex w-full items-center">
@@ -98,6 +102,9 @@
                 </div>
             </a>
             @endforeach
+            @if($sales_game->isEmpty())
+            <h1 class="text-2xl text-accent py-20">Discounted Games Soon!</h1>
+            @endif
         </div>
     </section>
 

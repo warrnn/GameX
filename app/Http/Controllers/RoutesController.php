@@ -44,7 +44,7 @@ class RoutesController extends Controller
     public function detail(Request $request)
     {
         $page_title = 'GameX | Detail';
-        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name')
+        $game = Games::select('*', 'games.id',  'games.name', 'categories.name as category_name', 'users.name as seller_name', 'user_id as seller_user_id')
             ->join('categories', 'categories.id', '=', 'games.category_id')
             ->join('sell_details', 'sell_details.game_id', '=', 'games.id')
             ->join('sellers', 'sellers.id', '=', 'sell_details.seller_id')

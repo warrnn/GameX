@@ -25,9 +25,18 @@
                 <div>
                     <h2 class="text-2xl font-bold text-white">IDR {{ number_format($game->price, 0, ',', '.') }}</h2>
                 </div>
+
+                @if ($game->seller_user_id != session('user_id'))
                 <div class="mt-1">
                     <a href="{{ route('buyer.payment', $game->id) }}" class="btn w-full mt-2 bg-accent text-white hover:bg-teritary transition">Buy Now</a>
                 </div>
+                @endif
+                @if ($game->seller_user_id == session('user_id'))
+                <div class="mt-1">
+                    <a href="{{ route('seller.manageGame', $game->id) }}" class="btn w-full mt-2 bg-accent text-white hover:bg-teritary transition">Edit This Product</a>
+                </div>
+                @endif
+
                 <div class="mt-4 space-y-2">
                     <div class="flex border-b border-white p-2">
                         <p class="text-sm">Seller</p>
