@@ -51,9 +51,13 @@ $(document).ready(function () {
             { data: "game_name", title: "Game" },
             { data: "transaction_data", title: "Date" },
             { data: "buyer_name", title: "Buyer" },
-            { data: "shipping_number", title: "Shipping Number", orderable: false },
+            {
+                data: "shipping_number",
+                title: "Shipping Number",
+                orderable: false,
+            },
             { data: "status", title: "Status" },
-        ]
+        ],
     });
 
     let tableOngoing = new DataTable("#ongoingTable", {
@@ -61,6 +65,13 @@ $(document).ready(function () {
         responsive: true,
         lengthChange: true,
         autoWidth: true,
+        columns: [
+            { title: "No" },
+            { data: "game", title: "Game" },
+            { data: "transaction_date", title: "Date" },
+            { data: "buyer_name", title: "Buyer" },
+            { data: "status", title: "Status" },
+        ],
     });
 
     let tableHistory = new DataTable("#historyTable", {
@@ -68,6 +79,13 @@ $(document).ready(function () {
         responsive: true,
         lengthChange: true,
         autoWidth: true,
+        columns: [
+            { title: "No" },
+            { data: "game", title: "Game" },
+            { data: "transaction_date", title: "Date" },
+            { data: "buyer_name", title: "Buyer" },
+            { data: "status", title: "Status" },
+        ],
     });
 
     // Admin Table
@@ -113,7 +131,11 @@ $(document).ready(function () {
             { data: "game_name", title: "Game" },
             { data: "buyer_name", title: "Buyer" },
             { data: "seller_name", title: "Seller" },
-            { data: "shipping_number", title: "Shipping Number", orderable: false },
+            {
+                data: "shipping_number",
+                title: "Shipping Number",
+                orderable: false,
+            },
             { data: "status", title: "Status" },
         ],
     });

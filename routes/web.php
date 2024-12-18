@@ -115,7 +115,10 @@ Route::prefix('admin')->middleware('isAdmin')->group(function () {
     Route::delete('/deleteadmin/{admin_id}', [AdminController::class, 'deleteAdmin'])->name('admin.deleteAdmin');
 });
 
-// JSON Responses
+// JSON Responses with Partials Render
 Route::prefix('')->middleware('isLogin')->group(function () {
+    Route::get('/searchoffers', [SearchController::class, 'searchOffers'])->name('buyer.searchOffers');
+    Route::get('/searchcommunities', [SearchController::class, 'searchCommunities'])->name('buyer.searchCommunities');
+    Route::get('/filtergames', [SearchController::class, 'filterGames'])->name('buyer.filterGames');
     Route::get('/searchownedgames', [SearchController::class, 'searchOwnedGames'])->name('buyer.searchOwnedGames');
 });

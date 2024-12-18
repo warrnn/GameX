@@ -7,7 +7,7 @@
 
 <section class="mx-8 sm:mx-20">
     <!-- Search -->
-    <section class="mt-8">
+    <!-- <section class="mt-8">
         <form class="max-w-xs max-h-xs w-full">
             <label for="small-search" class="mb-1 text-xs font-medium text-gray-900 sr-only">Search</label>
             <div class="relative">
@@ -20,10 +20,10 @@
                 <button type="submit" class="text-white absolute end-2 bottom-1 bg-accent hover:bg-primary transition focus:ring-2 focus:outline-none focus:ring-accent font-medium rounded-full text-xs px-3 py-1">Search</button>
             </div>
         </form>
-    </section>
+    </section> -->
 
     <!-- Display -->
-    <section class="h-auto pb-4 mt-4 grid grid-cols-6 place-items-center gap-8">
+    <section class="h-auto pb-4 mt-12 grid grid-cols-6 place-items-center gap-8">
         <!-- Carousel -->
         <div class="swiper mySwiper w-full h-min rounded-lg col-span-6 lg:col-span-4">
             <div class="swiper-wrapper">

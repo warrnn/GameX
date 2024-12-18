@@ -1,17 +1,33 @@
 <div class="overflow-x-auto bg-primary rounded-lg p-4 mt-4 shadow-lg">
     <table id="ongoingTable" class="text-white stripe hover row-border order-column">
         <tbody>
-            @for ($i = 0; $i < 10; $i++)
+            @foreach ($ongoing_transactions as $transaction)
             <tr>
-                <td>1</td>
-                <td>Game Name</td>
-                <td>Price</td>
-                <td>Category</td>
-                <td>Base</td>
-                <td>Potrait Image</td>
-                <td>Landscape Image</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $transaction->game_name }}</td>
+                <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d F Y') }}</td>
+                <td>{{ $transaction->buyer_name }}</td>
+                <td>
+                    @if ($transaction->status == 'PROCESS')
+                    <p class="text-blue-500">
+                        {{ $transaction->status }}
+                    </p>
+                    @elseif ($transaction->status == 'DELIVERY')
+                    <p class="text-yellow-500">
+                        {{ $transaction->status }}
+                    </p>
+                    @elseif ($transaction->status == 'SUCCESS')
+                    <p class="text-green-500">
+                        {{ $transaction->status }}
+                    </p>
+                    @elseif ($transaction->status == 'FAILED')
+                    <p class="text-red-500">
+                        {{ $transaction->status }}
+                    </p>
+                    @endif
+                </td>
             </tr>
-            @endfor
+            @endforeach
         </tbody>
     </table>
 </div>

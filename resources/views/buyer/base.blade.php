@@ -21,6 +21,71 @@
 <body class="bg-neutral overflow-x-hidden">
     <script>
         $(document).ready(function() {
+            // Live Search Offers Page
+            $("#offer-search").on("keyup", function() {
+                let query = $(this).val();
+                $.ajax({
+                    url: '{{ route('buyer.searchOffers') }}',
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(results) {
+                        $("#discounted_games_results").empty();
+
+                        $("#discounted_games_results").append(results);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        $("#discounted_games_results").empty().append('<p>An error occurred while fetching offers. Please try again.</p>');
+                    }
+                })
+            })
+
+            // Live Search Community Page
+            $("#comm-search").on("keyup", function() {
+                let query = $(this).val();
+                $.ajax({
+                    url: '{{ route('buyer.searchCommunities') }}',
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(results) {
+                        $("#communities_results").empty();
+
+                        $("#communities_results").append(results);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        $("#communities_results").empty().append('<p>An error occurred while fetching communities. Please try again.</p>');
+                    }
+                })
+            })
+
+            // Live Filter Games Page
+            $('#category').on('change', function() {
+                let category = $(this).val();
+                $.ajax({
+                    url: '{{ route('buyer.filterGames') }}',
+                    method: 'GET',
+                    data: {
+                        category: category
+                    },
+                    success: function(results) {
+                        $("#owned_games_results").empty();
+
+                        $("#owned_games_results").append(results);
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        $("#owned_games_results").empty().append('<p>An error occurred while fetching games. Please try again.</p>');
+                    },
+                });
+            });
+
+
+            // Live Search Games Page
             $("#small-search").on("keyup", function() {
                 let query = $(this).val();
                 $.ajax({
@@ -36,6 +101,7 @@
                     },
                     error: function(xhr) {
                         console.error(xhr.responseText);
+                        $("#owned_games_results").empty().append('<p>An error occurred while fetching games. Please try again.</p>');
                     },
                 });
             });

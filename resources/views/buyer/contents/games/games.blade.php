@@ -23,11 +23,12 @@
 <section class="h-auto mx-8 md:mx-16 mt-8 pb-44">
     <section class="flex flex-col-reverse md:flex-row items-center justify-end gap-4">
         <!-- Dropdown -->
-        <select class="block w-full p-2 ps-8 text-xs text-white border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none max-w-xs">
+        <select id="category" class="block w-full p-2 ps-8 text-xs text-white border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none max-w-xs">
             <option disabled selected>Select Category</option>
-            @for ($i = 0; $i < 10; $i++)
-                <option>Category {{ $i + 1 }}</option>
-                @endfor
+            <option value="all">All</option>
+            @foreach ($categories_owned as $category)
+            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+            @endforeach
         </select>
 
         <!-- Search Form -->

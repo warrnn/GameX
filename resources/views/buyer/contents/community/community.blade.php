@@ -21,7 +21,7 @@
 @endif -->
 
 <section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-20">
-    <section class="mt-14 flex items-center justify-center space-x-2">
+    <!-- <section class="mt-14 flex items-center justify-center space-x-2">
         <form class="w-full max-w-md">
             <label for="small-search" class="mb-1 text-xs font-medium text-gray-900 sr-only">Search</label>
             <div class="relative w-full">
@@ -39,7 +39,7 @@
                     class="text-white absolute end-2 bottom-1 bg-accent hover:bg-primary transition focus:ring-2 focus:outline-none focus:ring-accent font-medium rounded-full text-xs px-3 py-1">Search</button>
             </div>
         </form>
-    </section>
+    </section> -->
 
     <section class="h-auto mt-12">
         <div class="flex items-center">
