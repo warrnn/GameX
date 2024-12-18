@@ -22,8 +22,8 @@ class SellGamesController extends Controller
                 'release_date' => 'required',
                 'base' => 'required',
                 'description' => 'required',
-                'portrait_image' => 'image | mimes:jpeg,png,jpg | max:4096',
-                'landscape_image' => 'image | mimes:jpeg,png,jpg | max:4096'
+                'portrait_image' => 'mimes:jpeg,png,jpg | max:4096',
+                'landscape_image' => 'mimes:jpeg,png,jpg | max:4096'
             ]);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
@@ -89,8 +89,8 @@ class SellGamesController extends Controller
                 'release_date' => 'required',
                 'base' => 'required',
                 'description' => 'required',
-                'portrait_image' => 'image|mimes:jpeg,png,jpg|max:4096',
-                'landscape_image' => 'image|mimes:jpeg,png,jpg|max:4096'
+                'portrait_image' => 'mimes:jpeg,png,jpg|max:4096',
+                'landscape_image' => 'mimes:jpeg,png,jpg|max:4096'
             ]);
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());

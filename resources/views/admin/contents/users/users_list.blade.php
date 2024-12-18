@@ -1,7 +1,7 @@
 @extends('admin.base')
 
 @section('content')
-<!-- @if(session('success'))
+@if(session('success'))
 <script>
     Swal.fire({
         icon: 'success',
@@ -18,7 +18,7 @@
         confirmButtonColor: '#8B1E3F',
     })
 </script>
-@endif -->
+@endif
 
 <section class="h-screen mx-8 lg:mx-20 mt-14">
     <div class="flex">

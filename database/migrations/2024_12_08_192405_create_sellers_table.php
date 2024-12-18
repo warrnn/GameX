@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string("domicile");
             $table->string("address");
-            $table->string("phone", 16);
+            $table->string("phone", 16)->unique();
             $table->uuid("user_id");
             $table->foreign("user_id")->references("id")->on("users")->cascadeOnDelete();
             $table->enum("status", ["ACTIVE", "INACTIVE"]);

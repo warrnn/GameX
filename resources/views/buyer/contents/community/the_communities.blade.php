@@ -1,7 +1,7 @@
 @extends('buyer.base')
 
 @section('content')
-<!-- @if(session('success'))
+@if(session('success'))
 <script>
     Swal.fire({
         icon: 'success',
@@ -18,7 +18,7 @@
         confirmButtonColor: '#8B1E3F',
     })
 </script>
-@endif -->
+@endif
 
 <section class="bg-neutral w-screen h-auto flex flex-col px-14 pb-32">
     <section class="mt-14 flex flex-col md:flex-row items-center justify-center space-x-2">

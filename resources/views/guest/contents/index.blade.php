@@ -1,7 +1,7 @@
 @extends('guest.base')
 
 @section('content')
-<!-- @if(session('success'))
+@if(session('success'))
 <script>
     Swal.fire({
         icon: 'success',
@@ -18,7 +18,7 @@
         confirmButtonColor: '#8B1E3F',
     })
 </script>
-@endif -->
+@endif
 
 <link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
 <script src="{{ asset('js/index.js') }}"></script>
