@@ -11,6 +11,7 @@
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/loader.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
 
 	<!-- Javascripts -->
@@ -18,7 +19,16 @@
 	<script src="{{ asset('js/main.js') }}"></script>
 </head>
 
-<body class="bg-neutral overflow-x-hidden">
+<body class="bg-neutral overflow-x-hidden overflow-y-hidden">
+	<div id="loader" class="bg-black h-screen fixed top-0 left-0 w-full z-[9999]">
+		<div class="flex justify-center items-center h-full">
+			<div class='cssload-loader'>
+				<div class='cssload-inner cssload-one'></div>
+				<div class='cssload-inner cssload-two'></div>
+				<div class='cssload-inner cssload-three'></div>
+			</div>
+		</div>
+	</div>
 	@include('admin.includes.admin_navbar')
 	<section class="pt-20">
 		@yield('content')
