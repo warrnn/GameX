@@ -80,47 +80,47 @@ class TransactionController extends Controller
             'game_id' => $game_id
         ]);
 
-        // Config::$serverKey = config('midtrans.serverKey');
-        // Config::$clientKey = config('midtrans.clientKey');
-        // Config::$isSanitized = config('midtrans.isSanitized');
-        // Config::$isProduction = config('midtrans.isProduction');
-        // Config::$is3ds = config('midtrans.is3ds');
+        Config::$serverKey = config('midtrans.serverKey');
+        Config::$clientKey = config('midtrans.clientKey');
+        Config::$isSanitized = config('midtrans.isSanitized');
+        Config::$isProduction = config('midtrans.isProduction');
+        Config::$is3ds = config('midtrans.is3ds');
 
-        // // Parameter transaksi harcode
-        // $transactionDetails = [
-        //     'order_id' => $transaction->id, 
-        //     'gross_amount' => $game->price, 
-        // ];
+        // Parameter transaksi harcode
+        $transactionDetails = [
+            'order_id' => $transaction->id, 
+            'gross_amount' => $game->price, 
+        ];
 
 
-        // $customerDetails = [
-        //     'first_name' => $request->name,
-        //     'phone' => $request->phone,
-        //     'billing_address' => [
-        //         'address' => $request->address,
-        //         'city' => $request->city,
-        //     ],
+        $customerDetails = [
+            'first_name' => $request->name,
+            'phone' => $request->phone,
+            'billing_address' => [
+                'address' => $request->address,
+                'city' => $request->city,
+            ],
 
-        // ];
+        ];
 
-        // $params = [
-        //     'transaction_details' => $transactionDetails,
-        //     'customer_details' => $customerDetails,
-        // ];
+        $params = [
+            'transaction_details' => $transactionDetails,
+            'customer_details' => $customerDetails,
+        ];
 
-        // try {
-        //     $snapToken = Snap::getSnapToken($params);
-        //     Log::info('Snap Token:', ['snapToken' => $snapToken]);
-        // } catch (\Exception $e) {
-        //     Log::error('Error getting Snap Token:', ['error' => $e->getMessage()]);
-        //     return redirect()->back()->with('error', 'Failed to get payment token.');
-        // }
+        try {
+            $snapToken = Snap::getSnapToken($params);
+            Log::info('Snap Token:', ['snapToken' => $snapToken]);
+        } catch (\Exception $e) {
+            Log::error('Error getting Snap Token:', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Failed to get payment token.');
+        }
 
-        // $page_title = 'GameX | Payment';
-        // return view('buyer.contents.store.midtrans', compact('snapToken', 'page_title'));
+        $page_title = 'GameX | Payment';
+        return view('buyer.contents.store.midtrans', compact('snapToken', 'page_title'));
 
-        $routesController = new RoutesController();
-        return $routesController->games($request);
+        // $routesController = new RoutesController();
+        // return $routesController->games($request);
     }
 
     public function updateTransactionStatus(Request $request)
