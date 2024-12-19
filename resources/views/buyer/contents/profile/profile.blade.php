@@ -2,32 +2,35 @@
 
 @section('content')
 @if (session('success'))
-  <script>
-    Swal.fire({
-      icon: 'success',
-      title: '{{ session('success') }}',
-      confirmButtonColor: '#8B1E3F',
-    })
-  </script>
-  @endif
-        @if (session('info'))
-  <script>
-    Swal.fire({
-      icon: 'info',
-      title: '{{ session('info') }}',
-      confirmButtonColor: '#8B1E3F',
-    })
-  </script>
-  @endif
-        @if (session('error'))
-  <script>
-    Swal.fire({
-      icon: 'error',
-      title: '{{ session('error') }}',
-      confirmButtonColor: '#8B1E3F',
-    })
-  </script>
-  @endif
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: '{{ session('
+    success ') }}',
+    confirmButtonColor: '#8B1E3F',
+  })
+</script>
+@endif
+@if (session('info'))
+<script>
+  Swal.fire({
+    icon: 'info',
+    title: '{{ session('
+    info ') }}',
+    confirmButtonColor: '#8B1E3F',
+  })
+</script>
+@endif
+@if (session('error'))
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: '{{ session('
+    error ') }}',
+    confirmButtonColor: '#8B1E3F',
+  })
+</script>
+@endif
 
 <section class="max-w-4xl mx-auto p-8">
   <section class="flex flex-col lg:flex-row items-center justi space-x-6">
@@ -141,8 +144,8 @@
     <div id="default-styled-tab-content">
       <div class="hidden p-4 rounded-lg drop-shadow-lg space-y-4" id="styled-profile" role="tabpanel"
         aria-labelledby="profile-tab">
-        @if (isset($games) && $games->isNotEmpty())
-        @foreach ($games as $game)
+        @if (isset($digital_games) && $digital_games->isNotEmpty())
+        @foreach ($digital_games as $game)
         <div
           class="flex flex-col sm:flex-row items-center p-4 bg-primary rounded-lg shadow-lg max-w-full hover:scale-[0.98] transition">
           <img class="w-64 h-36 rounded-lg object-cover" src="{{ asset('storage/' . $game->landscape_image_path) }}"
@@ -168,7 +171,7 @@
             src="{{ asset('storage/' . $community->image_path) }}" alt="Game Thumbnail" />
           <div class="text-center sm:text-start sm:ms-8 mt-4 sm:mt-0">
             <h2 class="text-base font-semibold text-white">{{ $community->name }}</h2>
-            <p class="text-sm text-strike">Joined on  {{ \Carbon\Carbon::parse($community->join_date)->format('d F Y') }}</p>
+            <p class="text-sm text-strike">Joined on {{ \Carbon\Carbon::parse($community->join_date)->format('d F Y') }}</p>
           </div>
         </div>
         @endforeach
@@ -178,7 +181,50 @@
       </div>
       <div class="hidden p-4 rounded-lg drop-shadow-lg space-y-4" id="styled-settings" role="tabpanel"
         aria-labelledby="settings-tab">
-        @include('buyer.contents.profile.physical')
+        @if (isset($physical_games) && $physical_games->isNotEmpty())
+        @foreach($physical_games as $game)
+        <div tabindex="0" class="collapse bg-primary text-white">
+          <div class="collapse-title text-xl font-medium">
+            <h3>{{ $game->name }}</h3>
+            @if($game->status == 'PROCESS')
+            <p class="text-blue-500">PROCESS</p>
+            @elseif($game->status == 'SUCCESS')
+            <p class="text-green-500">SUCCESS</p>
+            @elseif($game->status == 'DELIVERY')
+            <p class="text-yellow-500">DELIVERY</p>
+            @elseif($game->status == 'FAILED')
+            <p class="text-red-500">FAILED</p>
+            @endif
+          </div>
+          <div class="collapse-content mx-4 space-y-4">
+            <div>
+              <h4 class="font-semibold text-lg mb-1">Seller</h4>
+              <p>Name : {{ $game->seller_name }}</p>
+              <p>Domicile : {{ $game->domicile }}</p>
+              <p>Address : {{ $game->address }}</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-lg mb-1">Buyer</h4>
+              <p>Name : {{ $buyer_for_transactions->where('game_id', $game->id)->first()->buyer_name }}</p>
+              <p>Domicile : {{ $buyer_for_transactions->where('game_id', $game->id)->first()->domicile }}</p>
+              <p>Address : Jl. {{ $buyer_for_transactions->where('game_id', $game->id)->first()->address }}</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-lg mb-1">Detail</h4>
+              @if ($game->shipping_number)
+              <p>Shipping Number : {{ $game->shipping_number }}</p>
+              @else
+              <p>Shipping Number : -</p>
+              @endif
+              <p>Items : {{ $game->name }}</p>
+              <p>Transaction Date : {{ \Carbon\Carbon::parse($game->transaction_date)->format('d F Y') }}</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @else
+        <p>No Physical Games Purchased.</p>
+        @endif
       </div>
     </div>
   </section>

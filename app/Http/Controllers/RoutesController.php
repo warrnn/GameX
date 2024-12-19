@@ -172,10 +172,10 @@ class RoutesController extends Controller
             ->where('game_owneds.user_id', $request->session()->get('user_id'))
             ->get();
         $categories_owned = Categories::select('*', 'categories.id', 'categories.name as category_name')
-        ->join('games', 'games.category_id', '=', 'categories.id')
-        ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
-        ->where('game_owneds.user_id', $request->session()->get('user_id'))
-        ->get();
+            ->join('games', 'games.category_id', '=', 'categories.id')
+            ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+            ->where('game_owneds.user_id', $request->session()->get('user_id'))
+            ->get();
 
         // dd($categories);
 
@@ -195,11 +195,28 @@ class RoutesController extends Controller
         $current_user = Users::where('id', $request->session()->get('user_id'))->first();
         $user_id = $request->session()->get('user_id');
 
-        $games = Games::select('*', 'games.id', 'games.name', 'game_owneds.created_at as owned_date')
+        $digital_games = Games::select('*', 'games.id', 'games.name', 'game_owneds.created_at as owned_date')
             ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
             ->where('game_owneds.user_id', $user_id)
+            ->where('games.base', 'DIGITAL')
             ->get();
-        // dd($games);
+        // dd($digital_games);
+        $physical_games = Games::select('*', 'games.id', 'games.name', 'game_owneds.created_at as owned_date', 'users.name as seller_name', 'transactions.status')
+            ->join('game_owneds', 'game_owneds.game_id', '=', 'games.id')
+            ->join('transactions', 'transactions.game_id', '=', 'games.id')
+            ->join('sellers', 'sellers.id', '=', 'transactions.seller_id')
+            ->join('users', 'users.id', '=', 'sellers.user_id')
+            ->where('game_owneds.user_id', $user_id)
+            ->where('games.base', 'PHYSICAL')
+            ->get();
+        $buyer_for_transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'transactions.status')
+            ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
+            ->join('users', 'users.id', '=', 'buyers.user_id')
+            ->join('games', 'games.id', '=', 'transactions.game_id')
+            ->where('games.base', 'PHYSICAL')
+            ->where('users.id', $user_id)
+            ->get();
+        // dd($physical_games);
         $communities = Communities::select('*', 'detail_joins.created_at as join_date')
             ->join('detail_joins', 'detail_joins.community_id', '=', 'communities.id')
             ->where('detail_joins.user_id', $user_id)
@@ -209,17 +226,17 @@ class RoutesController extends Controller
 
         // $transaction_date = Transactions:: ;
 
-        $games_count = $games->count();
+        $games_count = $digital_games->count() + $physical_games->count();
         $communities_count = $communities->count();
         $isSeller = Sellers::where('user_id', $request->session()->get('user_id'))->exists();
 
         if (Sellers::where('user_id', $request->session()->get('user_id'))->exists()) {
-            return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'games', 'communities', 'games_count', 'communities_count', 'isSeller'));
+            return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'digital_games', 'physical_games', 'buyer_for_transactions', 'communities', 'games_count', 'communities_count', 'isSeller'));
         }
 
         $kabKota = $this->getKabKotaAPI();
 
-        return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota', 'games', 'communities', 'games_count', 'communities_count', 'isSeller'));
+        return view('buyer.contents.profile.profile', compact('page_title', 'current_user', 'kabKota', 'digital_games', 'physical_games', 'buyer_for_transactions', 'communities', 'games_count', 'communities_count', 'isSeller'));
     }
 
 
@@ -268,6 +285,7 @@ class RoutesController extends Controller
             ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
             ->join('users', 'users.id', '=', 'buyers.user_id')
             ->join('games', 'games.id', '=', 'transactions.game_id')
+            ->where('transactions.seller_id', $this->getUserSellerId($request))
             ->get();
 
         return view('seller.contents.store.transaction_processes', compact('page_title', 'transactions'));
@@ -284,22 +302,30 @@ class RoutesController extends Controller
 
         $kabKota = $this->getKabKotaAPI();
 
-        $ongoing_transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name')
+        $ongoing_transactions = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name', 'transactions.status', 'transactions.seller_id')
             ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
             ->join('users', 'users.id', '=', 'buyers.user_id')
             ->join('games', 'games.id', '=', 'transactions.game_id')
-            ->where('status', 'PROCESS')
-            ->orWhere('status', 'DELIVERY')
             ->where('seller_id',  $this->getUserSellerId($request))
+            ->where(function ($query) {
+                $query->where('status', 'PROCESS')
+                    ->orWhere('status', 'DELIVERY');
+            })
             ->get();
 
-        $transactions_history = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name')
+        // dd($ongoing_transactions);
+
+        // dd($this->getUserSellerId($request));
+
+        $transactions_history = Transactions::select('*', 'transactions.id', 'users.name as buyer_name', 'games.name as game_name', 'transactions.status', 'transactions.seller_id')
             ->join('buyers', 'buyers.id', '=', 'transactions.buyer_id')
             ->join('users', 'users.id', '=', 'buyers.user_id')
             ->join('games', 'games.id', '=', 'transactions.game_id')
-            ->where('status', 'SUCCESS')
-            ->orWhere('status', 'FAILED')
             ->where('seller_id',  $this->getUserSellerId($request))
+            ->where(function ($query) {
+                $query->where('status', 'SUCCESS')
+                    ->orWhere('status', 'FAILED');
+            })
             ->get();
 
         return view('seller.contents.profile.profile', compact(
