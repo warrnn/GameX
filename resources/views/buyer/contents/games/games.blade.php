@@ -1,14 +1,34 @@
 @extends('buyer.base')
 
 @section('content')
-<section class="h-auto mx-8 md:mx-16 mt-8 pb-20">
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+
+<section class="h-auto mx-8 md:mx-16 mt-8 pb-44">
     <section class="flex flex-col-reverse md:flex-row items-center justify-end gap-4">
         <!-- Dropdown -->
-        <select class="block w-full p-2 ps-8 text-xs text-white border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none max-w-xs">
+        <select id="category" class="block w-full p-2 ps-8 text-xs text-white border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none max-w-xs">
             <option disabled selected>Select Category</option>
-            @for ($i = 0; $i < 10; $i++)
-                <option>Category {{ $i + 1 }}</option>
-                @endfor
+            <option value="all">All</option>
+            @foreach ($categories_owned as $category)
+            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+            @endforeach
         </select>
 
         <!-- Search Form -->
@@ -21,23 +41,32 @@
                     </svg>
                 </div>
                 <input type="search" id="small-search" class="block w-full p-2 ps-8 text-xs text-accent border border-gray-700 rounded-full bg-neutral focus:ring-accent focus:outline-none" placeholder="Search Game" required />
-                <button type="submit" class="text-white absolute end-2 bottom-1 bg-accent hover:bg-primary transition focus:ring-2 focus:outline-none focus:ring-accent font-medium rounded-full text-xs px-3 py-1">Search</button>
             </div>
         </form>
     </section>
 
     <section class="mt-8">
-        <div class="h-auto flex flex-wrap justify-around gap-8 mt-8">
-            @for ($i = 0; $i < 30; $i++)
-                <a href="{{ route('buyer.play') }}" class="drop-shadow-lg" data-aos="fade-up">
+        <div id="owned_games_results" class="h-auto flex flex-wrap justify-around gap-8 mt-8">
+            @foreach ($games_owned as $game)
+            <a href="{{ route('buyer.play') }}" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
-                    <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-64 sm:h-[17.1rem]">
+                    <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="{{ $game->name }}" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full text-center">
-                        <p class="text-lg font-bold text-white truncate max-w-48">Horizon: Zero Dawn</p>
+                        <p class="text-lg font-bold text-white truncate max-w-48">{{ $game->name }}</p>
                     </div>
                 </div>
-                </a>
-                @endfor
+            </a>
+            @endforeach
+            @if ($games_owned->isEmpty())
+            <div class="flex flex-col lg:flex-row items-center justify-center h-auto">
+                <div class="lg:ms-20">
+                    <img class="glitch h-52 lg:h-full" src="{{ asset('assets/logo/logo_light.png') }}" alt="logo light">
+                </div>
+                <div class="lg:ms-20 lg:me-20">
+                    <h1 class="text-white font-semibold text-2xl lg:text-5xl text-center lg:text-start">You don't own any game, Let's buy some games.</h1>
+                </div>
+            </div>
+            @endif
         </div>
     </section>
 </section>

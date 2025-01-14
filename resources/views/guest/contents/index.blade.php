@@ -1,6 +1,25 @@
 @extends('guest.base')
 
 @section('content')
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '{{ session('success') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '{{ session('error') }}',
+        confirmButtonColor: '#8B1E3F',
+    })
+</script>
+@endif
+
 <link rel="stylesheet" href="{{ asset('css/swiper/carousel.css') }}">
 <script src="{{ asset('js/index.js') }}"></script>
 <script src="{{ asset('js/swiper/carousel.js') }}"></script>
@@ -11,36 +30,48 @@
         <!-- Carousel -->
         <div class="swiper mySwiper w-full h-min rounded-lg col-span-6 lg:col-span-4">
             <div class="swiper-wrapper">
-                @for ($i = 0; $i < 5; $i++)
-                    <div class="swiper-slide">
-                    <img src="{{ asset('assets/images/landscape_dummy.jpg') }}" class="relative rounded-lg" alt="Landscape Dummy">
-                    <div class="flex bg-gradient-to-t from-black/85 from-10% to-transparent to-100% absolute inset-0 w-full h-full">
-                        <div class="mt-auto mb-8 ms-8 text-start">
-                            <h1 class="font-bold text-lg min-[420px]:text-xl sm:text-2xl text-white">Horizon Zero Dawn</h1>
-                            <p class="mb-4">IDR 729.000</p>
-                            <a href="#" class="px-4 py-2 bg-accent hover:bg-primary transition text-white rounded-lg mt-4">Buy Now</a>
+                @foreach ($games as $game)
+                @if ($loop->iteration == 5)
+                @break
+                @endif
+                <div class="swiper-slide">
+                    <div class="relative w-full h-[16rem] min-[480px]:h-[20rem] md:h-[30rem]">
+                        <img src="{{ asset('storage/' . $game->landscape_image_path) }}" class="absolute inset-0 w-full h-full object-cover rounded-lg" alt="{{ $game->name }}">
+                        <div class="flex bg-gradient-to-t from-black/85 from-10% to-transparent to-100% absolute inset-0 w-full h-full">
+                            <div class="mt-auto mb-8 ms-8 text-start">
+                                <h1 class="font-bold text-lg min-[420px]:text-xl sm:text-2xl text-white">{{ $game->name }}</h1>
+                                <p class="mb-4">IDR {{ number_format($game->price, 0, ',', '.') }}</p>
+                                <a href="#" class="px-4 py-2 bg-accent hover:bg-primary transition text-white rounded-lg mt-4">Buy Now</a>
+                            </div>
                         </div>
                     </div>
+                </div>
+                @endforeach
             </div>
-            @endfor
-        </div>
-        <div class="swiper-pagination"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <!-- Potrait Game Display -->
         <div class="col-span-2 place-self-start self-center hidden lg:block">
             <ul class="space-y-4">
-                @for ($i = 0; $i < 3; $i++)
-                    <li>
+                @foreach ($games as $game)
+                @if ($loop->iteration == 4)
+                @break
+                @endif
+                <li>
                     <a href="#" class="flex items-center hover:scale-[0.98] transition drop-shadow-lg">
-                        <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="h-24 xl:h-[9.2rem] object-cover rounded-lg">
-                        <p class="ms-4 text-white">Horizon: Zero Dawn</p>
+                        <img src="{{ asset('storage/' . $game->portrait_image_path) }}" alt="{{ $game->name }}" class="w-28 h-24 xl:h-[9.2rem] object-cover rounded-lg">
+                        <p class="ms-4 text-white">{{ $game->name }}</p>
                     </a>
-                    </li>
-                    @endfor
+                </li>
+                @endforeach
             </ul>
         </div>
     </section>
+
+    @if($games->isEmpty())
+    <h1 class="text-white font-bold mt-5 text-4xl py-8 text-center mx-auto glitch">Welcome to Game<span class="text-accent">X</span></h1>
+    @endif
 
     <!-- Special Offers -->
     <section class="h-auto mt-8">
@@ -51,21 +82,29 @@
             </a>
         </div>
         <div class="flex mt-6 flex-wrap justify-around gap-6 sm:gap-6">
-            @for ($i = 0; $i < 6; $i++)
-                <a href="#" class="drop-shadow-lg" data-aos="fade-up" data-aos-delay="{{ $i * 200 }}">
+            @foreach ($sales_game as $sale_game)
+            @if ($loop->iteration == 7)
+            @break
+            @endif
+            <a href="#" class="drop-shadow-lg" data-aos="fade-up">
                 <div class="flex flex-col space-y-2 hover:scale-[0.98] transition">
-                    <img src="{{ asset('assets/images/potrait_dummy.jpeg') }}" alt="Potrait Dummy" class="rounded-lg h-64 sm:h-[17.1rem]">
+                    <img src="{{ asset('storage/' . $sale_game->portrait_image_path) }}" alt="{{ $sale_game->name }}" class="rounded-lg h-64 sm:h-[17.1rem]">
                     <div class="flex flex-col w-full">
-                        <p class="text-lg font-bold text-white truncate max-w-44">Horizon: Zero Dawn</p>
-                        <p class="line-through text-strike">IDR 400.000</p>
+                        <p class="text-lg font-bold text-white truncate max-w-44">{{ $sale_game->name }}</p>
+                        <p class="line-through text-strike">IDR {{ number_format($sale_game->price, 0, ',', '.') }}</p>
                         <div class="flex items-center">
-                            <p class="text-white">IDR 100.000</p>
-                            <p class="ms-auto bg-accent p-1 rounded-lg text-xs text-white">75%</p>
+                            <p class="text-white">
+                                IDR {{ number_format(($sale_game->price - ($sale_game->price * $sale_game->discount / 100)), 0, ',', '.') }}
+                            </p>
+                            <p class="ms-auto bg-accent p-1 rounded text-xs text-white">{{ $sale_game->discount }}%</p>
                         </div>
                     </div>
                 </div>
-                </a>
-                @endfor
+            </a>
+            @endforeach
+            @if($sales_game->isEmpty())
+            <h1 class="text-2xl text-accent py-20">Discounted Games Soon!</h1>
+            @endif
         </div>
     </section>
 

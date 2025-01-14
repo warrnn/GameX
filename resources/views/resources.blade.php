@@ -27,3 +27,7 @@
 
 <!-- PowerGlitch -->
 <script src="https://unpkg.com/powerglitch@latest/dist/powerglitch.min.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
